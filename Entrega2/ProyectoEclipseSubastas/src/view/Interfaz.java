@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import controller.BaseDatos;
+//Importacion de las clases que modifican los datos, ubicadas en el model:
+//import controller.BaseDatos;
 
 import view.InterfazCliente;
 public class Interfaz {
@@ -106,7 +107,7 @@ public class Interfaz {
   public static void main(String[] args) throws Exception {
 	
 	  Interfaz consola = new Interfaz();
-	  consola.ejecutarAplicacion();
+	  consola.ejecutarInterfaz();
   }
 }
 

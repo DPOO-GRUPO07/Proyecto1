@@ -1,0 +1,1 @@
+titulo;año_creacion;lugar_creacion;tipo;propietario;dimension(N/A);material(N/A);peso(N/A);electricidad(boolean)(N/A);detalles(N/A)

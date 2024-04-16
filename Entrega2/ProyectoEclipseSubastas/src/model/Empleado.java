@@ -22,17 +22,13 @@ public class Empleado implements Usuario {
 
 	private String email;
 	
-	private Sede sede;
 	
-	public Empleado(String id, String nombre, String usuario, String contrasena, String email,Sede sede)
+	public Empleado(String id, String nombre, String usuario, String contrasena)
 	{
 		this.id= id;
 		this.nombre=nombre;
 		this.usuario= usuario;
-		this.contrasena=contrasena;
-		this.email=email;
-		this.sede=sede;
-	
+		this.contrasena=contrasena;	
 	}
 	
 	//getters
@@ -58,16 +54,8 @@ public class Empleado implements Usuario {
 		return this.contrasena;
 	}
 	
-	public Sede getSede()
-	{
-		return this.sede;
-				
-	}
+
 	
-	public void setSede(Sede sede)
-	{
-		this.sede= sede;
-	}
 
 	/*
 	 * Metodos inicio de sesion

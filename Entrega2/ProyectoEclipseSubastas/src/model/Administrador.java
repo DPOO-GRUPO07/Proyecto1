@@ -10,7 +10,6 @@ public class Administrador implements Usuario {
 	
 	private String nombre;
 	
-	private Sede sede;
 
     public Administrador(String id, String usuario, String contrasena, String nombre) {
     	this.id = id;
@@ -44,13 +43,6 @@ public class Administrador implements Usuario {
 		return nombre;
 	}
 	
-	public Sede getSede() {
-		return sede;
-	}
-	
-	public Sede setSede(Sede sede) {
-		return this.sede = sede;
-	}
 	
 	
 	

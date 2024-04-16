@@ -3,12 +3,11 @@ package controller;
 import java.io.IOException;
 
 import model.Administrador;
-import model.Carro;
+import model.Cliente;
 //import java.util.HashMap;
 //import controller.BaseDatos;
 import model.Empleado;
-import windows.VentanaAdministrador;
-import windows.VentanaPrincipal;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,13 +15,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import windows.VentanaSeleccionSede;
+
 
 public class ControllerAdministrador {
 	
 	private Administrador administrador;
-	private BaseDatos datos;
-	
+	//private BaseDatosInventario datosInventario;
+	//
 
 	public ControllerAdministrador() {
 		this.administrador=null;
@@ -35,8 +34,8 @@ public class ControllerAdministrador {
 		return this.administrador;
 	}
 	
-	public void setDatos(BaseDatos datos) {
-		this.datos=datos;
+	public void setDatos(BaseDatosInventario datosInvetario) {
+		this.datosInvetario=datosInvetario;
 	}
 	
 	public void LogIn(String usuario,String contrasena) {
@@ -60,21 +59,20 @@ public class ControllerAdministrador {
         //ControllerAdministrador elAdministrador = new ControllerAdministrador();
 		//administrador.setDatos(datos);
         
-        String usuario = VentanaPrincipal.getNombreUsuario().getText();
-        String contrasena = VentanaPrincipal.getContrasena().getText();
+        
         
         Administrador administrador = datos.getMapaAdministradores().get(usuario);
         
 		if(administrador.getUsuario().equals(usuario)&& administrador.getContrasena().equals(contrasena)) {
 		    //administrador=administrador;
             System.out.println("Ingresado correctamente");
-            VentanaSeleccionSede.mostrarVentana();
+            
             return true;
 			
 		}
 		else {
 			System.out.println("Error al ingresar");
-			VentanaPrincipal.getErrorLogIn().setText("Error Ingresando sesión!");
+			
 			return false;
 		}
 		
@@ -92,11 +90,12 @@ public class ControllerAdministrador {
 		agregarEmpleado(id, nombre, login, password, email, sede);
 	}
 	
-	public static void agregarVehiculo(String placa, String marca, String modelo,String color, String tipoTransmision) throws Exception {
-		agregarVehiculo(placa, marca, modelo, color,tipoTransmision);
+	public static void agregarPieza(String titulo, String año, String tipo ,String propietario) throws Exception {
+		agregarPieza(titulo, año, tipo, propietario);
 	}
 	
 	public void actualizarDatos() throws IOException {
+		// los datos de todas las calses BasesDatos... :
 		datos.cargarTodosLosDatos();
 	}
 	
