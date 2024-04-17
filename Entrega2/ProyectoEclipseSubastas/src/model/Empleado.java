@@ -11,16 +11,7 @@ public class Empleado implements Usuario {
 	private String usuario;
 	
 	private String contrasena;
-	
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	private String email;
 	
 	
 	public Empleado(String id, String nombre, String usuario, String contrasena)

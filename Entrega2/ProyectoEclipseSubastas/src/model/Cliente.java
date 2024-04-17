@@ -15,8 +15,7 @@ public class Cliente implements Usuario {
 	//
 	
 	
-	public Cliente(String usuario, String contrasena, String nombre,
-			String email, String nacionalidad, String rutaImagenID) {
+	public Cliente(String usuario, String contrasena, String nombre) {
 		this.contrasena=contrasena;
 		this.nombre=nombre;
 		this.usuario=usuario;

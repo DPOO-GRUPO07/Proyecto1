@@ -20,12 +20,14 @@ import java.io.FileWriter;
 public class ControllerAdministrador {
 	
 	private Administrador administrador;
-	//private BaseDatosInventario datosInventario;
+	private BaseDatosInventario datosInventario;
+	private BaseDatosSubastas datosSubastas;
+	private BaseDatosEmpresa datosEmpresa;
 	//
 
 	public ControllerAdministrador() {
 		this.administrador=null;
-		this.datos=null;
+		this.datosInventario=null;
 		
 	}
 	
@@ -54,7 +56,7 @@ public class ControllerAdministrador {
 		}
 	}
 	
-	public static boolean login(BaseDatos datos) {
+	public static boolean login(BaseDatosEmpresa datos) {
 		
         //ControllerAdministrador elAdministrador = new ControllerAdministrador();
 		//administrador.setDatos(datos);
