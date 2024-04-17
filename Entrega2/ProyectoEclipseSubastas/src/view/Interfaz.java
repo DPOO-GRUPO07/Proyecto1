@@ -7,20 +7,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import controller.BaseDatosEmpresa;
+
 //Importacion de las clases que modifican los datos, ubicadas en el model:
 //import controller.BaseDatos;
 
 import view.InterfazCliente;
 public class Interfaz {
-	//private static PersistenciaInventario datosInventario;
-    //private static PersistenciaCompraSubastas datosCompraSubastas;
+	//private static BaseDatosInventario datosInventario;
+    //private static BaseDatosSubastas datosCompraSubastas;
+	private static BaseDatosEmpresa datosEmpresa;
 	public void ejecutarInterfaz() throws Exception
 	{
 		System.out.println("Casa de Ventas y Subastas");
 
 		boolean continuar = true;
-		cargarDatosInventario();
-		cargarDatosCompraSubasta();
+		//cargarDatosInventario();
+		//cargarDatosSubasta();
+		cargarDatosEmpresa();
 		while (continuar)
 		{
 			try
@@ -29,11 +33,11 @@ public class Interfaz {
 				
 				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
 				if (opcion_seleccionada == 1)
-					InterfazCliente.correrCliente(datos);
-				else if (opcion_seleccionada == 2 && datos != null)
-					InterfazEmpleado.correrEmpleado(datos);
-				else if (opcion_seleccionada == 3 && datos != null)
-					InterfazAdministrador.correrAdministrador(datos);
+					InterfazCliente.correrCliente(datosEmpresa);
+				else if (opcion_seleccionada == 2 && datosEmpresa != null)
+					InterfazEmpleado.correrEmpleado(datosEmpresa);
+				else if (opcion_seleccionada == 3 && datosEmpresa != null)
+					InterfazAdministrador.correrAdministrador(datosEmpresa);
 					
 				else if (opcion_seleccionada == 4)
 				{
@@ -78,17 +82,17 @@ public class Interfaz {
 			}
 			return null;
 		}
-		public static PersistenciaInventario cargarDatosInventario() {
+		public static BaseDatosEmpresa cargarDatosEmpresa() {
 			System.out.println("Cargando datos: ");
 
 
 			try
 			{
-				datosInventario = new PersistenciaInventario();
+				datosEmpresa = new BaseDatosEmpresa();
 				//datosCompraSubasta = new PersistenciaCompraSubasta();
-				datos.descargarTodoslosDatos();
+				datosEmpresa.descargarDatosEmpresa();
 				System.out.println("Se actualizaron los datos");
-				return datos;
+				return datosEmpresa;
 			}
 			catch (FileNotFoundException e)
 			{
@@ -105,7 +109,6 @@ public class Interfaz {
 			
 		}
   public static void main(String[] args) throws Exception {
-	
 	  Interfaz consola = new Interfaz();
 	  consola.ejecutarInterfaz();
   }

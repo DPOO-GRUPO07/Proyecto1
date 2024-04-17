@@ -14,6 +14,7 @@ import model.Cliente;
 import model.Empleado;
 import model.Factura;
 import model.Licencia;
+import model.Pieza;
 import model.Reserva;
 import model.Sede;
 import model.Seguro;
@@ -27,29 +28,20 @@ public class ControllerEmpleado {
 	
 	private Empleado empleado;
 	
-	private BaseDatos datos;
+	private BaseDatosEmpresa datos;
 	
-	private Alquiler alquiler;
 	
-	private HashMap<String,Carro> mapaCarros; //mapa carros por placa
-	private HashMap<String,Reserva> mapaReservas; //mapa reservas por id
-	private HashMap<String,Categoria> mapaCategorias;//mapa categorias por nombre
-	private HashMap<String,Temporada> mapaTemporadas;
-	private HashMap<String,Sede> mapaSedes;//mapa sedes por nombre
-	private HashMap<String,Seguro> mapaSeguros;//mapa seguros por id
-	private HashMap<String,Tarifa> mapaTarifasExcedente;//mapa tarivas por id
-	private HashMap<String, Factura> mapaFacturas; //mapa factura por id
+	private HashMap<String,Pieza> mapaPiezas; //mapa carros por placa
+	//private HashMap<String,Inventario> mapaInventario;//mapa sedes por nombre
 	//USUARIOS
-	private HashMap<String, Alquiler> mapaAlquileres;// mapa alquileres por id
 	private HashMap<String,Cliente> mapaClientes; //mapa clientes por login
 	private HashMap<String,Empleado> mapaEmpleados; //mapa empleados por login
-	private HashMap<String, Licencia> mapaLicencias; //mapa licencias por numero de licencia
-	private HashMap<String, Tarjeta> mapaTarjetas; //mapa tarjetas por número
+
 	
 	
 	//Constructor
 	
-	public ControllerEmpleado(BaseDatos datos)
+	public ControllerEmpleado(BaseDatosEmpleado datos)
 	{
 		this.empleado=null;
 		this.datos=datos;

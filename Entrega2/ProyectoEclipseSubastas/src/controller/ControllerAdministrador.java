@@ -7,7 +7,7 @@ import model.Cliente;
 //import java.util.HashMap;
 //import controller.BaseDatos;
 import model.Empleado;
-
+import model.Pieza;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -36,8 +36,8 @@ public class ControllerAdministrador {
 		return this.administrador;
 	}
 	
-	public void setDatos(BaseDatosInventario datosInvetario) {
-		this.datosInvetario=datosInvetario;
+	public void setDatos(BaseDatosEmpresa datos) {
+		this.datosEmpresa=datos;
 	}
 	
 	public void LogIn(String usuario,String contrasena) {
@@ -45,7 +45,7 @@ public class ControllerAdministrador {
 		//String usuario = VentanaPrincipal.getNombreUsuario().getText();
 		//String contrasena =VentanaPrincipal.getContrasena().getText();
 
-		Administrador administrador = datos.getMapaAdministradores().get(usuario);
+		Administrador administrador = datosEmpresa.getMapaAdministradores().get(usuario);
 		
 		if(administrador.getUsuario().equals(usuario)&& administrador.getContrasena().equals(contrasena)) {
 			this.administrador=administrador;
@@ -107,12 +107,12 @@ public class ControllerAdministrador {
 		return id + ";" + nombre + ";" + usuario + ";" + contrasena + ";" + email + ";"+ sede;
 	}
 	
-	public String crearLineaVehiculo(Carro carro) {
-		String placa = carro.getPlaca();
-		String marca = carro.getmarca();
-		String modelo = carro.getModelo();
-		String color = carro.getColor();
-		String tipoTransmision = carro.getTipoTransmision();
+	public String crearLineaPieza(Pieza pieza) {
+		String placa = pieza.getPlaca();
+		String marca = pieza.getmarca();
+		String modelo = pieza.getModelo();
+		String color = pieza.getColor();
+		String tipoTransmision = pieza.getTipoTransmision();
 
 		String nombreCategoria = carro.getCategoria().getNombre();
 		String nombreSede = carro.getSede().getNombre();

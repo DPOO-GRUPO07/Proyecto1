@@ -6,20 +6,18 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import controller.BaseDatos;
+
+import controller.BaseDatosEmpresa;
 import controller.ControllerCliente;
 import controller.ControllerEmpleado;
-import model.Alquiler;
-import model.Empleado;
-import model.Reserva;
-import model.Seguro;
+
 
 public class InterfazEmpleado {
 	public static ControllerEmpleado elEmpleado;
-	private static BaseDatos datos;
+	private static BaseDatosEmpresa datos;
 	
 	
-	public static void correrEmpleado(BaseDatos datos) throws IOException
+	public static void correrEmpleado(BaseDatosEmpresa datos) throws IOException
 	{
 		System.out.println("Bienvenido cliente");
 		elEmpleado= new ControllerEmpleado(datos);

@@ -7,16 +7,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.Carro;
-import model.Categoria;
 import model.Cliente;
-import model.Reserva;
-import model.Sede;
-import model.Temporada;
+import model.Pieza;
+import model.Inventario;
 
 public class ControllerCliente {
 private Cliente cliente;
-private BaseDatos datos; // debe haber unos datos asociados para trabajar
+private BaseDatosEmpresa datos; // debe haber unos datos asociados para trabajar
+private BaseDatosInventario datosInventario;
 
 // Métodos
 //contructoir
@@ -29,7 +27,7 @@ public ControllerCliente() {
 public Cliente getCliente() {
 	return this.cliente;
 }
-public void setDatos(BaseDatos datos) {
+public void setDatos(BaseDatosEmpresa datos) {
 	this.datos=datos;
 }
 public void logIn(String usuario,String contrasena) {
@@ -50,7 +48,7 @@ public void logIn(String usuario,String contrasena) {
 }
 public double crearReserva(String nombreCategoria, String sedeRec,
 		String timeReco, String sedeFin, String timeFin) {
-	HashMap<String,Carro> mapaCarros=datos.getMapaCarros();
+	HashMap<String,Pieza> mapaCarros=datos.getMapaPiezas();
 	//Vamos a iterar el inventario hasta encontrar el primer
 	//carro que cumple las características y lo vamos a reservar
 	// si se hace la reserva retornamos true, si se itera toda la lista 
@@ -58,7 +56,7 @@ public double crearReserva(String nombreCategoria, String sedeRec,
 	LocalDateTime fechaPed1=LocalDateTime.parse(timeReco);
 	LocalDateTime fechaPed2=LocalDateTime.parse(timeFin);
 	
-	for(Carro carro:mapaCarros.values()) {
+	for(Pieza carro:mapaPiezas.values()) {
 		LocalDateTime fechadisp=carro.getFechaDispCons();
 		if(fechadisp!=null && fechadisp.plusDays(2).isAfter(fechaPed1)) {
 			continue; //descartamos el carro por fecha disponibilidad

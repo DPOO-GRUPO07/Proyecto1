@@ -4,16 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.BaseDatos;
+import controller.BaseDatosEmpresa;
 import controller.ControllerAdministrador;
 import controller.ControllerEmpleado;
-import controller.Writer;
 import model.Empleado;
 
 
 public class InterfazAdministrador {
 	public static ControllerAdministrador elAdministrador;
-	public static void correrAdministrador(BaseDatos datos) throws Exception
+	public static void correrAdministrador(BaseDatosEmpresa datos) throws Exception
 	{
 		System.out.println("Bienvenido Administrador");
 		elAdministrador= new ControllerAdministrador();

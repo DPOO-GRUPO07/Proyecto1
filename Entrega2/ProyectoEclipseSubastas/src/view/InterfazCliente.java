@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.BaseDatos;
+import controller.BaseDatosEmpresa;
 import controller.ControllerCliente;
 
 public class InterfazCliente {
 	public static ControllerCliente elCliente;
-	public static void correrCliente(BaseDatos datos) throws IOException
+	public static void correrCliente(BaseDatosEmpresa datos) throws IOException
 	{
 		System.out.println("Bienvenido cliente");
 		elCliente= new ControllerCliente();
@@ -68,10 +68,22 @@ public class InterfazCliente {
 		{
 			System.out.println("\nOpciones de la aplicación\n");
 			System.out.println("1. LogIn");
-			System.out.println("2. CrearReserva");
+			System.out.println("2. Vender o Comprar");
 			System.out.println("3. LogOut");
 
-	}
+	   }
+		
+		public static void mostrarMenu2()
+		{
+			System.out.println("\nMENU COMPRADOR");
+			System.out.println("1. Realizar nueva compra");
+			System.out.println("2. Realizar Subasta");
+			System.out.println("3. Vender o subastar Pieza");
+			System.out.println("4. Ver piezas obtenidas");
+			
+		}
+		
+		
 		public static void login() {
 			String usuario =input("Usuario: ");
 			String contrasena =input("contraseña: ");
@@ -86,19 +98,16 @@ public class InterfazCliente {
 			}
 		}
 public static void crearReserva() {
-	String nombreCat=input("Categoría: ");
-	String sedeRec=input("Sede alquiler: ");
-	String timeRecoger=input("Fecha-hora alquiler: ");
-	String sedeFin=input("sede entrega");
-	String timeFin=input("Fecha-hora entrega");
-	double cobro=elCliente.crearReserva(nombreCat, sedeRec, timeRecoger, sedeFin, timeFin);
+	String nombreCat=input("Titulo o nombre de la pieza: ");
+
+	double cobro=elCliente.crearReserva(nombreCat, sedeRec, timeRecoger, timeFin);
 	
 	if(cobro!=0) {
-	System.out.println("Su reserva está lista, se le cobró el 30% correspondiente a"
+	System.out.println("Su compra se realizo exitosamente"
 			+cobro );
 	}
 	else{
-		System.out.println("No hay carros disponibles, intente cambiar la categoría o las fechas");
+		System.out.println("No hay piezas disponibles");
 	}
 
 	}

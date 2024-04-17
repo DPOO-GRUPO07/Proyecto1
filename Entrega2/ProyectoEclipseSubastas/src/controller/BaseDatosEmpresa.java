@@ -50,8 +50,6 @@ public class BaseDatosEmpresa{
 		Cliente cliente =(Cliente) lista.get(0);
 		
 		//Se agregan los objetos anteriores a cliente
-		//cliente.setLicencia(mapaLicencias.get(numLic));
-		//cliente.setTarjeta(mapaTarjetas.get(numTar));
 		mapaClientes.put(usuario,cliente);
 		linea = br.readLine();
 	}
