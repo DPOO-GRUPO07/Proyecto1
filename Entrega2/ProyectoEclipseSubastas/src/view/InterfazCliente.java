@@ -26,7 +26,7 @@ public class InterfazCliente {
 				if (opcion_seleccionada == 1)
 					login();
 				else if (opcion_seleccionada == 2 && elCliente.getCliente() != null)
-					crearReserva();
+					realizarCompra();
 
 				else if (opcion_seleccionada == 3)
 				{
@@ -76,11 +76,10 @@ public class InterfazCliente {
 		public static void mostrarMenu2()
 		{
 			System.out.println("\nMENU COMPRADOR");
-			System.out.println("1. Realizar nueva compra");
-			System.out.println("2. Realizar Subasta");
+			System.out.println("1. Realizar Compra por Valor fijo");
+			System.out.println("2. Realizar Compra por medio de Subasta");
 			System.out.println("3. Vender o subastar Pieza");
 			System.out.println("4. Ver piezas obtenidas");
-			
 		}
 		
 		
@@ -97,10 +96,11 @@ public class InterfazCliente {
 				System.out.println("Ingresado correctamente");	
 			}
 		}
-public static void crearReserva() {
-	String nombreCat=input("Titulo o nombre de la pieza: ");
+		
+public static void realizarCompra() {
+	String nombrePieza=input("Titulo o nombre de la pieza: ");
 
-	double cobro=elCliente.crearReserva(nombreCat, sedeRec, timeRecoger, timeFin);
+	double cobro=elCliente.realizarCompra(nombrePieza);
 	
 	if(cobro!=0) {
 	System.out.println("Su compra se realizo exitosamente"

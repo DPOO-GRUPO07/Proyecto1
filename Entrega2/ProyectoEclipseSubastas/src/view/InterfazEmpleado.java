@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import controller.BaseDatosEmpresa;
 import controller.ControllerCliente;
 import controller.ControllerEmpleado;
+import model.Compra;
+import model.Empleado;
 
 
 public class InterfazEmpleado {
@@ -30,12 +32,12 @@ public class InterfazEmpleado {
 			try
 			{
 				mostrarMenu();
-				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opci�n"));
+				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opcion"));
 				
 				if (opcion_seleccionada == 1)
 					inicializacion = login();
 				else if (opcion_seleccionada == 2 && inicializacion == true)
-					crearAlquiler();
+					crearCompra();
 				
 				else if (opcion_seleccionada == 3 && inicializacion == true)
 				{
@@ -118,96 +120,24 @@ public static boolean login()
 
 // Crear Alquiler
 
-private static void crearAlquiler() 
+private static void crearCompra() 
 {
-	Alquiler alquiler;
-	String reserva = input("�El cliente tiene una reserva? (SI/NO)");
-	String cliente = input("Ingrese el usuario del cliente");
-	String sedeDevolucion = input("Ingrese la sede en donde se desea devolver el veh�culo");
-	String sedeRecoger = input("Ingrese la sede en donde se recoge el veh�culo"); 
-	LocalDateTime fechaDeb = LocalDateTime.parse(input("Ingrese fecha de devoluci�n del veh�culo (yyyy-MM-dd'T'HH:mm:ss)"));
-	LocalDateTime fechaInicio = LocalDateTime.parse(input("Ingrese fecha para recoger veh�culo (yyyy-MM-dd'T'HH:mm:ss)"));
-	String categoria = input("Digite la categor�a del veh�culo deseada: ");
-	
+	Compra compra;
+	String reserva = input("El cliente realizo una compra? (SI/NO)");
+	String cliente = input("Ingrese el usuario del cliente: ");
+	String pieza = input("Ingrese el titulo de la pieza: ");
 	//Verificar si ya existe reserva
 	if (reserva.equals("SI"))
 	{
-		alquiler = elEmpleado.crearAlquilerReserva(categoria, cliente, fechaInicio, fechaDeb);	
+		//compra = elEmpleado.crearRegistroPago(pieza, cliente);	
 	}
 	
 	else 
 	{
-		alquiler = elEmpleado.CrearAlquiler(cliente, sedeDevolucion, sedeRecoger, fechaDeb, fechaInicio, categoria);
+		//compra = elEmpleado.crearCompra(cliente);
 	}
-	
-	// Agregar seguros si es posible crear el alquiler
-	if (alquiler.equals(null)) {
-		System.out.println("No hay un veh�culo disponible en este momento");
-	} else {
-		// Preguntar si desea adquirir un nuevo seguro
+}	
 
-		String seguro = input("Desea adquirir alg�n tipo de seguro (SI/NO)");
-
-		if (seguro.equalsIgnoreCase("SI")) {
-			boolean condicion = true;
-
-			while (condicion) {
-				Seguro seg = menuSeguros();
-				alquiler.setSeguro(seg);
-
-				String continuar = input("Desea a�adir m�s seguros (SI/NO)");
-
-				if (!(continuar.equalsIgnoreCase("SI"))) {
-					condicion = false;
-				}
-			}
-		}
-		
-		alquiler.setLicencia( InterfazEmpleado.datos.getMapaClientes().get(cliente).getLicencia());
-		
-		//Crear las licencias que necesite el cliente
-		String licencia = input("Desea a�adir m�s licencias");
-
-		if (licencia.equalsIgnoreCase("SI")) {
-			boolean condicion = true;
-			int contador = 0;
-
-			while (condicion) {
-				contador++;
-				String lic = input("Ingrese n�mero de licencia");
-				alquiler.setLicencia(InterfazEmpleado.datos.getMapaLicencias().get(lic));
-
-				String continuar = input("Desea a�adir m�s licencias (SI/NO)");
-
-				if (!(continuar.equalsIgnoreCase("SI"))) {
-					condicion = false;
-				}
-			}
-			
-			alquiler.getFactura().setPrecioLicencias(contador-1);
-		}
-	}
-	
-	//imprimir factura
-	
-	elEmpleado.generarFactura(alquiler.getFactura());
-		
-}
-
-private static Seguro menuSeguros()
-{
-	for (Seguro seg:InterfazEmpleado.datos.getMapaSeguros().values())
-	{
-		String id = seg.getId();
-		String nombre = seg.getNombre();
-		String precio = String.valueOf(seg.getPrecio());
-		System.out.println(id + ".  "+nombre + "  precio: $ " + precio);
-	}
-	
-	String idSeguro = input("Digite el id del seguro que desea");
-	return InterfazEmpleado.datos.getMapaSeguros().get(idSeguro);
-}
-	
 public static String input(String mensaje)
 {
 	try
@@ -233,14 +163,17 @@ public static void mostrarMenu()
 {
 		System.out.println("\nOpciones de la aplicaci�n\n");
 		System.out.println("1. LogIn");
-		System.out.println("2. Crear un Alquiler");
+		System.out.println("2. Salir de la aplicacion");
+}
+
+public static void mostrarMenu1()
+{
+		System.out.println("\nOpciones del Empleado\n");
+		System.out.println("1. Registrar Compra");
 		System.out.println("3. Modificar fecha de finalizaci�n de limpieza o mantenimiento");
 		System.out.println("4. Cambiar fecha de veh�culos que ya completaron limpieza");
 		System.out.println("5. LogOut");
-
 }
-
-
 
 
 }

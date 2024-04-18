@@ -42,7 +42,6 @@ public class InterfazAdministrador {
 								String modelo=input("Ingrese el modelo del vehiculo");
 								String color=input("Escriba el color del vehiculo");
 								String transmision=input("Escriba e ltipo de transmision del vehiculo");
-								ControllerAdministrador.agregarVehiculo(placa,marca,modelo,color,transmision);
 								
 							}
 							else if (opcion_seleccionada2 == 2) {

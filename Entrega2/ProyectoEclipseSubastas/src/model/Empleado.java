@@ -46,8 +46,6 @@ public class Empleado implements Usuario {
 	}
 	
 
-	
-
 	/*
 	 * Metodos inicio de sesion
 	 * */ 
@@ -65,7 +63,7 @@ public class Empleado implements Usuario {
     public void iniciarSesion(String nombreUsuario, String contrasena) {
         if (usuario.equals(this.usuario) && contrasena.equals(this.contrasena)) {
             sesionIniciada = true;
-            System.out.println("Sesi�n iniciada para el empleado: " + usuario);
+            System.out.println("Sesion iniciada para el empleado: " + usuario);
         } else {
             System.out.println("Error: Nombre de usuario o contrase�a incorrectos.");
         }

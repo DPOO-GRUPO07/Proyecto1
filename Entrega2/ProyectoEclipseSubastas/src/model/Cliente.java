@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Cliente implements Usuario {
 
-	
 	//Atributos
 	//login
 	private String usuario;
@@ -13,7 +12,6 @@ public class Cliente implements Usuario {
 	private String nombre;
 	//private Boolean Propietario;
 	//
-	
 	
 	public Cliente(String usuario, String contrasena, String nombre) {
 		this.contrasena=contrasena;
@@ -35,10 +33,7 @@ public class Cliente implements Usuario {
 
 		return nombre;
 	}
-
-	
-
-    
+   
 }
 	
 	

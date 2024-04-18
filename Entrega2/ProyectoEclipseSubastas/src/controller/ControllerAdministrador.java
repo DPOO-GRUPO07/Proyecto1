@@ -113,7 +113,6 @@ public class ControllerAdministrador {
 		String modelo = pieza.getModelo();
 		String color = pieza.getColor();
 		String tipoTransmision = pieza.getTipoTransmision();
-
 		String nombreCategoria = carro.getCategoria().getNombre();
 		String nombreSede = carro.getSede().getNombre();
 		String estado = carro.getEstado();

@@ -44,9 +44,6 @@ public class Administrador implements Usuario {
 	}
 	
 	
-	
-	
-
 
     /*
      * Inicion de sesion

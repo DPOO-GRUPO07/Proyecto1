@@ -46,16 +46,13 @@ public void logIn(String usuario,String contrasena) {
 }
 
 }
-public double crearReserva(String nombreCategoria, String sedeRec,
-		String timeReco, String sedeFin, String timeFin) {
+public double realizarCompra(String nombrePieza) {
 	HashMap<String,Pieza> mapaCarros=datos.getMapaPiezas();
-	//Vamos a iterar el inventario hasta encontrar el primer
-	//carro que cumple las características y lo vamos a reservar
+	//Vamos a iterar el inventario hasta encontrar la primer
+	//Pieza que cumple las características y lo vamos a reservar
 	// si se hace la reserva retornamos true, si se itera toda la lista 
 	//sin éxito retornamos false
-	LocalDateTime fechaPed1=LocalDateTime.parse(timeReco);
-	LocalDateTime fechaPed2=LocalDateTime.parse(timeFin);
-	
+
 	for(Pieza carro:mapaPiezas.values()) {
 		LocalDateTime fechadisp=carro.getFechaDispCons();
 		if(fechadisp!=null && fechadisp.plusDays(2).isAfter(fechaPed1)) {

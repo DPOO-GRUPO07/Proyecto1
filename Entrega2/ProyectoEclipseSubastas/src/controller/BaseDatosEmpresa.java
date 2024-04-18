@@ -14,6 +14,7 @@ import model.Empleado;
 //import model.Pieza;
 
 
+
 public class BaseDatosEmpresa{
 	
 	private HashMap<String,Cliente> mapaClientes; //mapa clientes por login
@@ -35,6 +36,64 @@ public class BaseDatosEmpresa{
 	public HashMap<String, Empleado> getMapaEmpleados(){
 		return mapaEmpleados;
 	}
+	
+	public HashMap<String, Administrador> getMapaAdministradores(){
+		return mapaAdministradores;
+	}
+	
+     //////////////////////////////////////////////////////////////////////////
+    //EL WRITE ADMINISTRADOR
+	private String generarTextoAdministradores(){
+		String texto="";
+		for(Administrador administrador:mapaAdministradores.values()) {
+			texto+=comprimirAdministrador(administrador);
+			texto+="\n";
+		}
+		return texto;
+	}
+	
+	public void actualizarArchivoAdministradores() throws IOException {
+		String texto=generarTextoAdministradores();
+		FileWriter fichero = new FileWriter("data/administradores.txt");
+		fichero.write(texto);
+		fichero.close();
+	}
+	
+	// ADMINISTRADOR
+		public String comprimirAdministrador(Administrador administrador) {
+			String documento = administrador.getId();
+			String usuario = administrador.getUsuario();
+			String contrasena = administrador.getContrasena();
+			String nombre = administrador.getNombre();
+			return usuario + ";" + contrasena + ";" + nombre + ";" + documento;
+		}
+    
+		private void crearMapaAdministradores() throws IOException {
+			BufferedReader br = new BufferedReader(new FileReader("data/administradores.txt"));
+			String linea = br.readLine();
+			while (linea != null) {
+				String[] partes = linea.split(";");
+				String usuario = partes[0];
+				
+				Administrador administrador= descomprimirAdministrador(linea);
+				mapaAdministradores.put(usuario, administrador);
+				linea = br.readLine();
+			}
+		    br.close();
+		  }
+	//READ ADMINISTRADOR 
+		public Administrador descomprimirAdministrador(String linea) {
+			String[] partes = linea.split(";");
+			String usuario = partes[0];
+			String contrasena = partes[1];
+			String nombre=partes[2];
+			String id = partes[3];
+			
+			Administrador admin= new Administrador(id,usuario, contrasena, nombre);
+			
+			return admin;
+		}
+
 	
 	//READ: Descargar todas las clientes
 
@@ -96,12 +155,73 @@ public class BaseDatosEmpresa{
 		}
 	
 	
+	//EMPLEADO
+	//READ: Descargar todas las alquileres
+
+	private void crearMapaEmpleados() throws IOException {
+	BufferedReader br = new BufferedReader(new FileReader("data/empleados.txt"));
+
+	String linea = br.readLine();
+
+	while (linea != null) {
+		String[] partes = linea.split(";");
+		String usuario = partes[2];
+		Empleado empleado = descomprimirEmpleado(linea, mapaEmpleados);
+		mapaEmpleados.put(usuario, empleado);
+		linea = br.readLine();
+	}
+	br.close();
+	}
+	
+	public Empleado descomprimirEmpleado(String linea, HashMap<String, Empleado> mapaEmpleados)
+	{
+		String[] partes = linea.split(";");
+		String id = partes[0];
+		String nombre = partes[1];
+		String usuario = partes[2];
+		String contrasena = partes[3];
+		
+		
+		Empleado empleado= new Empleado(id, nombre, usuario, contrasena);
+		
+		return empleado;
+	}
+	
+	//Write: Actualizar archivo, reescribirlo.
+
+	private String generarTextoEmpleados(){
+		String texto="";
+		for(Empleado empleado:mapaEmpleados.values()) {
+			texto+=comprimirEmpleado(empleado);
+			texto+="\n";
+		}
+		return texto;
+	}
+	
+	private void actualizarArchivoEmpleados() throws IOException {
+		String texto=generarTextoEmpleados();
+		FileWriter fichero = new FileWriter("data/empleados.txt");
+		fichero.write(texto);
+		fichero.close();
+	}
+	
+	public String comprimirEmpleado(Empleado empleado) {
+		String id = empleado.getId();
+		String nombre = empleado.getNombre();
+		String usuario = empleado.getUsuario();
+		String contrasena = empleado.getContrasena();
+
+
+		return id + ";" + nombre + ";" + usuario + ";" + contrasena;
+	}
+	
+	
 	
 	public void descargarDatosEmpresa() throws IOException {
 
 		crearMapaClientes();// Incompleto
 		//crearMapaEmpleados();// Falta
-		//crearMapaAdministradores(); // Falta
+		crearMapaAdministradores(); // Incompleto
 		
 		
 	}

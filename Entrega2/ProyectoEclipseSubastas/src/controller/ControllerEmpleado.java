@@ -7,20 +7,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.Alquiler;
-import model.Carro;
-import model.Categoria;
+
 import model.Cliente;
 import model.Empleado;
-import model.Factura;
-import model.Licencia;
 import model.Pieza;
-import model.Reserva;
-import model.Sede;
-import model.Seguro;
-import model.Tarifa;
-import model.Tarjeta;
-import model.Temporada;
+
 
 public class ControllerEmpleado {
 	
@@ -41,27 +32,16 @@ public class ControllerEmpleado {
 	
 	//Constructor
 	
-	public ControllerEmpleado(BaseDatosEmpleado datos)
+	public ControllerEmpleado(BaseDatosEmpresa datos)
 	{
 		this.empleado=null;
 		this.datos=datos;
-		this.mapaCarros= datos.getMapaCarros();
-		this.mapaAlquileres= datos.getMapaAlquileres();
 		this.mapaEmpleados=datos.getMapaEmpleados();
-		this.mapaLicencias= datos.getMapaLicencias();
-		this.mapaSeguros= datos.getMapaSeguros();
-		this.mapaFacturas = datos.getMapaFacturas();
 		this.mapaClientes = datos.getMapaClientes();
-		this.mapaCategorias= datos.getMapaCateg();
-		this.mapaSedes=datos.getMapaSedes();
-		this.mapaSeguros = datos.getMapaSeguros();
-		this.mapaTarifasExcedente= datos.getMapaTarifas();
-		this.mapaTemporadas=datos.getMapaTemporadas();
-		this.mapaTarjetas = datos.getMapaTarjetas();
 	}
 	
 	
-	public BaseDatos getDatos()
+	public BaseDatosEmpresa getDatos()
 	{
 		return this.datos;
 	}
@@ -153,14 +133,9 @@ public class ControllerEmpleado {
 	
 	//Para crear un alquiler donde no exista reserva
 	
-	public Alquiler CrearAlquiler( String usuario, String sedeDevolucion, String sedeRecoger,
-			LocalDateTime fechaDeb, LocalDateTime fechaInicio, String categoria)
+	public Compra crearRegistroPago( String usuario, String categoria)
 	{
 		Cliente objCliente= mapaClientes.get(usuario);
-		Sede objSedeDevolucion=mapaSedes.get(sedeDevolucion);
-		Sede objSedeRecoger=mapaSedes.get(sedeRecoger);
-		Categoria objCategoria = mapaCategorias.get(categoria);
-		Temporada tarifa = tarifa(objCategoria, fechaInicio);
 		Tarifa tarifaExcedente= null;
 		
 		Carro carro = Disponibilidad(objSedeRecoger, objCategoria,fechaInicio, fechaDeb);
@@ -168,11 +143,6 @@ public class ControllerEmpleado {
 		this.alquiler= new Alquiler(objCliente, fechaDeb, fechaInicio, objSedeRecoger, objSedeDevolucion, carro);
 		alquiler.setTarifa(tarifa);
 		
-		if (!(sedeDevolucion.equals(sedeRecoger)))
-		{
-			tarifaExcedente= tarifaExcedente(objCategoria, fechaInicio);
-			alquiler.setTarifaExcedente(tarifaExcedente);
-		}
 		Factura factura= new Factura(objCliente,alquiler);
 		mapaFacturas.put(factura.getId(), factura);
 		alquiler.setFactura(factura);
@@ -184,45 +154,18 @@ public class ControllerEmpleado {
 	
 // Crear alquiler para una reserva existente
 	
-	public Alquiler crearAlquilerReserva(String categoriaId, String usuario, LocalDateTime fechaInicio, LocalDateTime fechaFin)
+	public Compra crearRegistroPago(String categoriaId, String usuario,)
 	{
 		Cliente cliente= mapaClientes.get(usuario);
 		Categoria categoria = mapaCategorias.get(categoriaId);
-		Reserva reserva = verificarReserva(categoria, cliente, fechaInicio, fechaFin);
-		if (reserva != null) {
-		Sede sedeRecoger= reserva.getSedeInicio();
-		Sede sedeDevolucion= reserva.getSedeFin();
-		Temporada tarifa = tarifa(categoria, fechaInicio);
-		Tarifa tarifaExcedente= null;
-		Carro carro = reserva.getCarroReservado();
-		
-		this.alquiler= new Alquiler(cliente, fechaFin, fechaInicio, sedeRecoger, sedeDevolucion, carro);
-		alquiler.setTarifa(tarifa);
-		
-		if (!(sedeDevolucion.equals(sedeRecoger)))
-		{
-			tarifaExcedente = tarifaExcedente(categoria, fechaInicio);
-			alquiler.setTarifaExcedente(tarifaExcedente);
-		}
-		
-		mapaAlquileres.put(alquiler.getAlquileresId(), alquiler);
-		Factura factura = new Factura(cliente, alquiler);
-		factura.setPagoAnticipado();
-		alquiler.setFactura(factura);
-		mapaFacturas.put(factura.getId(), factura);
-		carro.setEstado("alquilado");
-		
-		
-		return alquiler;}
-		
-		else {return null;}
+
 		
 	}
 		
 		
 		
 // Verificar si existe una reserva 
-		private Reserva verificarReserva(Categoria categoria, Cliente cliente, LocalDateTime fechaInicio, LocalDateTime fechaFin)
+		private Compra verificarCompra(Categoria categoria, Cliente cliente, LocalDateTime fechaInicio, LocalDateTime fechaFin)
 		{
 			
 			for (Carro carro: categoria.getCarros())
