@@ -27,12 +27,10 @@ public class ControllerAdministrador {
 
 	public ControllerAdministrador() {
 		this.administrador=null;
-		this.datosInventario=null;
-		
+		this.datosInventario=null;	
 	}
 	
-	public Administrador getAdministrador() {
-		
+	public Administrador getAdministrador() {	
 		return this.administrador;
 	}
 	
@@ -46,7 +44,6 @@ public class ControllerAdministrador {
 		
 		if(administrador.getUsuario().equals(usuario)&& administrador.getContrasena().equals(contrasena)) {
 			this.administrador=administrador;
-			
 		}
 		else {
 			System.out.println("Error al ingresar");
@@ -54,16 +51,13 @@ public class ControllerAdministrador {
 	}
 	
 	
-		
-		
 	/*
-	 * setters 
+	 * Getters and Setters
 	 * 
 	*/
 	
 	
-
-
+	
 	
 	public static void agregarPieza(String titulo, String año, String tipo ,String propietario) throws Exception {
 		agregarPieza(titulo, año, tipo, propietario);

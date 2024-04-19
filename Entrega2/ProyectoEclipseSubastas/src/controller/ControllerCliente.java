@@ -74,7 +74,7 @@ public double realizarCompra(String nombrePieza) {
 	
 
 public void actualizarDatos() throws IOException {
-	datos.cargarTodosLosDatos();
+	datos.cargarDatosSubastas();
 }
 
 }
