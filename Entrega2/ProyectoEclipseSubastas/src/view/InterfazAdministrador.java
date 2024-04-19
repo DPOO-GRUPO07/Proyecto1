@@ -63,8 +63,8 @@ public class InterfazAdministrador {
 								//ControllerAdministrador.agregarEmpleado(id, nombre, usuario, contrasena, email, sede);
 							}
 							else if (opcion_seleccionada2 == 4) {
-								String usuario=input("Ingresa el usuario del empleado a eliminar");
-								ControllerAdministrador.eliminarLineaEmpleados("data/empleados.txt", usuario);
+								String usuario=input("");
+								
 						    }
 						}
 						catch (NumberFormatException e)

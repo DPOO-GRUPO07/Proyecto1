@@ -21,7 +21,7 @@ public class ControllerAdministrador {
 	
 	private Administrador administrador;
 	private BaseDatosInventario datosInventario;
-	private BaseDatosSubastas datosSubastas;
+	//private BaseDatosSubastas datosSubastas;
 	private BaseDatosEmpresa datosEmpresa;
 	//
 
@@ -42,9 +42,6 @@ public class ControllerAdministrador {
 	
 	public void LogIn(String usuario,String contrasena) {
 		
-		//String usuario = VentanaPrincipal.getNombreUsuario().getText();
-		//String contrasena =VentanaPrincipal.getContrasena().getText();
-
 		Administrador administrador = datosEmpresa.getMapaAdministradores().get(usuario);
 		
 		if(administrador.getUsuario().equals(usuario)&& administrador.getContrasena().equals(contrasena)) {
@@ -56,29 +53,6 @@ public class ControllerAdministrador {
 		}
 	}
 	
-	public static boolean login(BaseDatosEmpresa datos) {
-		
-        //ControllerAdministrador elAdministrador = new ControllerAdministrador();
-		//administrador.setDatos(datos);
-        
-        
-        
-        Administrador administrador = datos.getMapaAdministradores().get(usuario);
-        
-		if(administrador.getUsuario().equals(usuario)&& administrador.getContrasena().equals(contrasena)) {
-		    //administrador=administrador;
-            System.out.println("Ingresado correctamente");
-            
-            return true;
-			
-		}
-		else {
-			System.out.println("Error al ingresar");
-			
-			return false;
-		}
-		
-    }
 	
 		
 		
@@ -86,21 +60,16 @@ public class ControllerAdministrador {
 	 * setters 
 	 * 
 	*/
+	
+	
 
 
-	public static void agregarEmpleado(String id, String nombre, String login, String password, String email, String sede ) throws Exception {
-		agregarEmpleado(id, nombre, login, password, email, sede);
-	}
 	
 	public static void agregarPieza(String titulo, String año, String tipo ,String propietario) throws Exception {
 		agregarPieza(titulo, año, tipo, propietario);
 	}
 	
-	public void actualizarDatos() throws IOException {
-		// los datos de todas las calses BasesDatos... :
-		datos.cargarTodosLosDatos();
-	}
-	
+
 	
 	public static String crearLineaEmpleado(String id, String nombre, String usuario, String contrasena, String email, String sede) {
 
@@ -113,45 +82,18 @@ public class ControllerAdministrador {
 		String tipo = pieza.getTipo();
 		String propietario = pieza.getPropietario();
 		// Aqui van los condicionales que indican segun el TIPO de pieza, que informacion perdile al admin
-		String dimension = pieza.dimension();
-		String nombreCategoria = pieza.getCategoria().getNombre();
-		String estado = pieza.getEstado();
-		String str = titulo + ";" + anoCreacion + ";" + tipo + ";" + propietario + ";" + dimension + ";" + ";"
-				+ nombreCategoria + ";" + estado;
+		String dimension = pieza.getDimension();
+		String material = pieza.getMaterial();
+		String peso = pieza.getPeso();
+		String electricidad = pieza.getElectricidad();
+		String detalles = pieza.getDetalles();
+		String str = titulo + ";" + anoCreacion + ";" + tipo + ";" + propietario + ";" + dimension + ";"
+				+ material + ";" + peso + ";" + electricidad + ";" + detalles;
 		return str;
 	}
 	
 	
-    public void eliminarlineaEmpleados(String archivo, String contenidoAEliminar) {
-        try {
-            
-            BufferedReader reader = new BufferedReader(new FileReader(archivo));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("/data/tempEmpleados.txt"));
-
-            String lineaActual;
-
-            // Lee linea por linea y copia todas las lineas excepto la que deseas eliminar
-            while ((lineaActual = reader.readLine()) != null) {
-                if (!lineaActual.contains(contenidoAEliminar)) {
-                    writer.write(lineaActual + System.getProperty("line.separator"));
-                }
-            }
-
-            // Cierra los archivos
-            reader.close();
-            writer.close();
-
-            // Borra el archivo original y renombra el archivo temporal
-            if (new File(archivo).delete()) {
-                new File("temp.txt").renameTo(new File(archivo));
-                System.out.println("Fila eliminada exitosamente.");
-            } else {
-                System.out.println("No se pudo eliminar la fila.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
     
     public static void agregarLineaEmpleados(String archivo, String nuevaLinea) {
         try {
@@ -169,16 +111,16 @@ public class ControllerAdministrador {
         }
     }
     
-    public static void eliminarLineaVehiculos(String archivo, String placa) {
+    public static void eliminarLineaPiezas(String archivo, String titulo) {
         try {
             // Abre el archivo original y un archivo temporal para escritura
             BufferedReader reader = new BufferedReader(new FileReader(archivo));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("data/tempVehiculos.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("data/tempPiezas.txt"));
             String lineaActual;
 
             // Lee l�nea por l�nea y copia todas las l�neas excepto las que contienen el fragmento
             while ((lineaActual = reader.readLine()) != null) {
-                if (!lineaActual.contains(placa)) {
+                if (!lineaActual.contains(titulo)) {
                     writer.write(lineaActual + System.getProperty("line.separator"));
                 }
             }
@@ -189,54 +131,22 @@ public class ControllerAdministrador {
 
             // Borra el archivo original y renombra el archivo temporal
             if (new File(archivo).delete()) {
-                new File("data/tempVehiculos.txt").renameTo(new File(archivo));
+                new File("data/tempPiezas.txt").renameTo(new File(archivo));
                 System.out.println("Carro eliminado exitosamente.");
             } else {
-                System.out.println("No se pudo eliminar el Carro.");
+                System.out.println("No se pudo eliminar la Pieza");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    public static void eliminarLineaEmpleados(String archivo, String fragmento) {
-        try {
-            // Abre el archivo original y un archivo temporal para escritura
-            BufferedReader reader = new BufferedReader(new FileReader(archivo));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("data/tempEmpleados.txt"));
-            String lineaActual;
-
-            // Lee l�nea por l�nea y copia todas las l�neas excepto las que contienen el fragmento
-            while ((lineaActual = reader.readLine()) != null) {
-                if (!lineaActual.contains(fragmento)) {
-                    writer.write(lineaActual + System.getProperty("line.separator"));
-                }
-            }
-
-            // Cierra los archivos
-            reader.close();
-            writer.close();
-
-            // Borra el archivo original y renombra el archivo temporal
-            if (new File(archivo).delete()) {
-                new File("data/tempEmpleados.txt").renameTo(new File(archivo));
-                System.out.println("Empleado eliminado exitosamente.");
-            } else {
-                System.out.println("No se pudo eliminar el empleado.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
-    public void agregar(String archivo, String lineaEliminar) {
-     
-    	agregarLineaEmpleados(archivo, lineaEliminar);
-    }
-
-    public void eliminar(String archivo, String lineaEliminar) {
-        
-        eliminarlineaEmpleados(archivo, lineaEliminar);
-    }
+	public void actualizarDatos() throws IOException {
+		// los datos de todas las calses BasesDatos... :
+		datosEmpresa.cargarDatosEmpresa();
+	}
+    
+    
 
 }

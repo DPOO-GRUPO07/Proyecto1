@@ -171,7 +171,6 @@ public class BaseDatosEmpresa{
 		String usuario = partes[2];
 		String contrasena = partes[3];
 		
-		
 		Empleado empleado= new Empleado(id, nombre, usuario, contrasena);
 		
 		return empleado;
@@ -199,8 +198,6 @@ public class BaseDatosEmpresa{
 		String nombre = empleado.getNombre();
 		String usuario = empleado.getUsuario();
 		String contrasena = empleado.getContrasena();
-
-
 		return id + ";" + nombre + ";" + usuario + ";" + contrasena;
 	}
 	
@@ -209,6 +206,12 @@ public class BaseDatosEmpresa{
 		crearMapaClientes();// Incompleto
 		crearMapaEmpleados();// Falta
 		crearMapaAdministradores(); // Incompleto	
+	}
+	
+	public void cargarDatosEmpresa() throws IOException {
+		actualizarArchivoClientes();
+		actualizarArchivoEmpleados();
+		actualizarArchivoAdministradores();
 	}
 }
 
