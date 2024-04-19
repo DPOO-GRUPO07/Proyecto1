@@ -37,16 +37,15 @@ public class InterfazAdministrador {
 							int opcion_seleccionada2 = Integer.parseInt(input("Ingresa una opcion "));
 							if (opcion_seleccionada2 == 1) {
 								
-								String placa=input("Ingrese la placa del vehiculo");
-								String marca=input("Ingrese la marca del vehiculo");
-								String modelo=input("Ingrese el modelo del vehiculo");
-								String color=input("Escriba el color del vehiculo");
-								String transmision=input("Escriba e ltipo de transmision del vehiculo");
+								String placa=input("Ingrese el Titulo del la Pieza");
+								String marca=input("Ingrese el año de creacion");
+								String modelo=input("Ingrese el lugar de creacion");
+								String color=input("Ingrese el Tipo de pieza");
+								String transmision=input("Ingrese el nombre del propietario de la pieza, si no tiene puede colocar N/A");
 								
 							}
 							else if (opcion_seleccionada2 == 2) {
-								String id=input("Ingresa la placa del vehiculo a eliminar");
-								ControllerAdministrador.eliminarLineaVehiculos("data/carros.txt", id);
+								String id=input("Ingrese el usuario del comprador");
 							}
 							else if (opcion_seleccionada2 == 3) {
 								String id=input("Ingrese el documento de identidad del empleado");
@@ -120,10 +119,10 @@ public class InterfazAdministrador {
 		public static void mostrarMenu2()
 		{
 			System.out.println("\nMENU ADMINISTRADOR");
-			System.out.println("1. Registrar compra nuevo Vehiculo");
-			System.out.println("2. Eliminar Vehiculo en deshuso");
-			System.out.println("3. Registrar Empleado nuevo");
-			System.out.println("4. Eliminar Empleado");
+			System.out.println("1. Registrar Pieza en el Inventario");
+			System.out.println("2. Registrar Pieza Vendida");
+			System.out.println("3. Habilitar comprador");
+			System.out.println("4. Modificar estado de la Pieza");
 			
 		}
 		

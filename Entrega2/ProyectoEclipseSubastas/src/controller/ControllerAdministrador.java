@@ -108,17 +108,16 @@ public class ControllerAdministrador {
 	}
 	
 	public String crearLineaPieza(Pieza pieza) {
-		String placa = pieza.getPlaca();
-		String marca = pieza.getmarca();
-		String modelo = pieza.getModelo();
-		String color = pieza.getColor();
-		String tipoTransmision = pieza.getTipoTransmision();
-		String nombreCategoria = carro.getCategoria().getNombre();
-		String nombreSede = carro.getSede().getNombre();
-		String estado = carro.getEstado();
-		String fechaDisp = String.valueOf(carro.getFechaDispCons());
-		String str = placa + ";" + marca + ";" + modelo + ";" + color + ";" + tipoTransmision + ";" + ";"
-				+ nombreCategoria + ";" + nombreSede + ";" + estado + ";" + fechaDisp;
+		String titulo = pieza.getTitulo();
+		String anoCreacion = pieza.getAnoCreacion();
+		String tipo = pieza.getTipo();
+		String propietario = pieza.getPropietario();
+		// Aqui van los condicionales que indican segun el TIPO de pieza, que informacion perdile al admin
+		String dimension = pieza.dimension();
+		String nombreCategoria = pieza.getCategoria().getNombre();
+		String estado = pieza.getEstado();
+		String str = titulo + ";" + anoCreacion + ";" + tipo + ";" + propietario + ";" + dimension + ";" + ";"
+				+ nombreCategoria + ";" + estado;
 		return str;
 	}
 	

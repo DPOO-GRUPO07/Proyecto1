@@ -1,32 +1,25 @@
 package controller;
 
 import java.util.HashMap;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import model.Administrador;
 import model.Cliente;
 import model.Empleado;
-//import model.Pieza;
-
-
 
 public class BaseDatosEmpresa{
 	
 	private HashMap<String,Cliente> mapaClientes; //mapa clientes por login
 	private HashMap<String,Administrador> mapaAdministradores;
 	private HashMap<String,Empleado> mapaEmpleados; //mapa empleados por login
-	//private HashMap<String,Pieza> mapaPiezas; //mapa empleados por login
-	
+
 	public BaseDatosEmpresa() {
 		this.mapaClientes=new HashMap<>();
 	    this.mapaEmpleados=new HashMap<>();
 	    this.mapaAdministradores= new HashMap<>();
-	    //this.mapaPiezas= new HashMap<>();
 	}
 	
 	public HashMap<String, Cliente> getMapaClientes(){
@@ -61,11 +54,10 @@ public class BaseDatosEmpresa{
 	
 	// ADMINISTRADOR
 		public String comprimirAdministrador(Administrador administrador) {
-			String documento = administrador.getId();
 			String usuario = administrador.getUsuario();
 			String contrasena = administrador.getContrasena();
 			String nombre = administrador.getNombre();
-			return usuario + ";" + contrasena + ";" + nombre + ";" + documento;
+			return usuario + ";" + contrasena + ";" + nombre + ";";
 		}
     
 		private void crearMapaAdministradores() throws IOException {
@@ -87,9 +79,8 @@ public class BaseDatosEmpresa{
 			String usuario = partes[0];
 			String contrasena = partes[1];
 			String nombre=partes[2];
-			String id = partes[3];
 			
-			Administrador admin= new Administrador(id,usuario, contrasena, nombre);
+			Administrador admin= new Administrador(usuario, contrasena, nombre);
 			
 			return admin;
 		}
@@ -154,7 +145,6 @@ public class BaseDatosEmpresa{
 			return usuario + ";" + contrasena + ";" + nombre ;
 		}
 	
-	
 	//EMPLEADO
 	//READ: Descargar todas las alquileres
 
@@ -188,7 +178,6 @@ public class BaseDatosEmpresa{
 	}
 	
 	//Write: Actualizar archivo, reescribirlo.
-
 	private String generarTextoEmpleados(){
 		String texto="";
 		for(Empleado empleado:mapaEmpleados.values()) {
@@ -215,18 +204,11 @@ public class BaseDatosEmpresa{
 		return id + ";" + nombre + ";" + usuario + ";" + contrasena;
 	}
 	
-	
-	
 	public void descargarDatosEmpresa() throws IOException {
 
 		crearMapaClientes();// Incompleto
-		//crearMapaEmpleados();// Falta
-		crearMapaAdministradores(); // Incompleto
-		
-		
+		crearMapaEmpleados();// Falta
+		crearMapaAdministradores(); // Incompleto	
 	}
-	
-		
-	
 }
 

@@ -83,7 +83,7 @@ public class Interfaz {
 			return null;
 		}
 		public static BaseDatosEmpresa cargarDatosEmpresa() {
-			System.out.println("Cargando datos: ");
+			//System.out.println("Cargando datos: ");
 
 
 			try
@@ -91,7 +91,7 @@ public class Interfaz {
 				datosEmpresa = new BaseDatosEmpresa();
 				//datosCompraSubasta = new PersistenciaCompraSubasta();
 				datosEmpresa.descargarDatosEmpresa();
-				System.out.println("Se actualizaron los datos");
+				//System.out.println("Se actualizaron los datos");
 				return datosEmpresa;
 			}
 			catch (FileNotFoundException e)

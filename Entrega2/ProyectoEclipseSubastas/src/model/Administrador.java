@@ -2,7 +2,6 @@ package model;
 
 public class Administrador implements Usuario {
 	
-	private String id;
 	
 	private String usuario;
 	
@@ -11,8 +10,8 @@ public class Administrador implements Usuario {
 	private String nombre;
 	
 
-    public Administrador(String id, String usuario, String contrasena, String nombre) {
-    	this.id = id;
+    public Administrador(String usuario, String contrasena, String nombre) {
+
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -20,10 +19,6 @@ public class Administrador implements Usuario {
     }
     
     
-	public String getId()
-	{
-		return id;
-	}
 	
 
 	public String getUsuario()

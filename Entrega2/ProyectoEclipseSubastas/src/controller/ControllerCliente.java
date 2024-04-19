@@ -17,7 +17,7 @@ private BaseDatosEmpresa datos; // debe haber unos datos asociados para trabajar
 private BaseDatosInventario datosInventario;
 
 // Métodos
-//contructoir
+//contructor
 public ControllerCliente() {
 	this.cliente=null;
 	this.datos=null;
@@ -42,7 +42,6 @@ public void logIn(String usuario,String contrasena) {
 		}
 }	
 	else {
-	
 }
 
 }
@@ -50,15 +49,15 @@ public double realizarCompra(String nombrePieza) {
 	HashMap<String,Pieza> mapaCarros=datos.getMapaPiezas();
 	//Vamos a iterar el inventario hasta encontrar la primer
 	//Pieza que cumple las características y lo vamos a reservar
-	// si se hace la reserva retornamos true, si se itera toda la lista 
+	//si se hace la reserva retornamos true y si se itera toda la lista 
 	//sin éxito retornamos false
 
-	for(Pieza carro:mapaPiezas.values()) {
+	for(Pieza pieza:mapaPiezas.values()) {
 		LocalDateTime fechadisp=carro.getFechaDispCons();
 		if(fechadisp!=null && fechadisp.plusDays(2).isAfter(fechaPed1)) {
 			continue; //descartamos el carro por fecha disponibilidad
 		}
-		if (carro.getUsoActual()!=null) {
+		if (pieza.getUsoActual()!=null) {
 		LocalDateTime entregaAlquiler=carro.getUsoActual().getFechaDeb();
 	
 		if(entregaAlquiler.isAfter(fechaPed1))  {
@@ -66,39 +65,7 @@ public double realizarCompra(String nombrePieza) {
 			continue; //descartamos el carro por estar alquilado
 		}
 		}
-		if(hayReservasEnIntervalo(carro,fechaPed1,fechaPed2)==true) {
-			continue;
-		}
-		if(cliente.getTarjeta().getBloqueo()==false) {
-		Categoria categoria=datos.getMapaCateg().get(nombreCategoria);
-		Sede sede1=datos.getMapaSedes().get(sedeRec);
-		Sede sede2=datos.getMapaSedes().get(sedeFin);
-		System.out.println("Reservas "+Reserva.numeroReservas);
-		
-		Reserva reserva=new Reserva(cliente, fechaPed1, fechaPed2,
-				
-				categoria, carro, sede1, sede2);
-		//Pongo reserva en mapa reservas
-		System.out.println("Reservas "+Reserva.numeroReservas);
-		String idReserva =String.valueOf(reserva.getNumReserva());
-		datos.getMapaReservas().put(idReserva, reserva);
-		//poner reserva en carro
-		carro.agregarReserva(reserva);
-		//guardar carro actualizado
-		datos.getMapaCarros().replace(carro.getPlaca(), carro);
-		//generar bloqueo de tarjeta
-		cliente.getTarjeta().bloquear();
-		//calcular tarifa, a partir de la fija en el dia pervisto para el alquiler
-		double tarifaCateg =categoria.tarifaCat();
-		//calcular tarifa a partir de temporada
-		Temporada temp=encontrarTemporada(fechaPed1);
-		double tarifaTemp=temp.getTarifaTemporada();
-		//calcular diferencia en días
-		long diffDays=ChronoUnit.DAYS.between(fechaPed1, fechaPed2);
-		double difDias =(double) diffDays;
-		return difDias*(tarifaTemp+tarifaCateg)*0.3;
-		
-	}
+
 	}
 	return 0;
 }
@@ -166,4 +133,5 @@ private boolean hayFechaEnIntervalo(LocalDateTime fecha, LocalDateTime fecha1,
 public void actualizarDatos() throws IOException {
 	datos.cargarTodosLosDatos();
 }
+
 }
