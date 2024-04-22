@@ -1,13 +1,18 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import model.Administrador;
 import model.Cliente;
 //import java.util.HashMap;
 //import controller.BaseDatos;
 import model.Empleado;
-import model.Pieza;
+import model.Galeria;
+import model.Subasta;
+import model.Venta;
+import pieza.Pieza;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,23 +24,27 @@ import java.io.FileWriter;
 
 public class ControllerAdministrador {
 	
+	private HashMap<String, Pieza> mapaPiezas;
 	private Administrador administrador;
 	private BaseDatosInventario datosInventario;
-	//private BaseDatosSubastas datosSubastas;
+	private BaseDatosGaleria datosGaleria;
 	private BaseDatosEmpresa datosEmpresa;
 	//
 
 	public ControllerAdministrador() {
-		this.administrador=null;
-		this.datosInventario=null;	
+		
 	}
 	
 	public Administrador getAdministrador() {	
 		return this.administrador;
 	}
 	
-	public void setDatos(BaseDatosEmpresa datos) {
+	public void setDatosEmpresa(BaseDatosEmpresa datos) {
 		this.datosEmpresa=datos;
+	}
+	
+	public void setDatosGaleria(BaseDatosGaleria datosGaleria) {
+		this.datosGaleria=datosGaleria;
 	}
 	
 	public void LogIn(String usuario,String contrasena) {
@@ -56,38 +65,60 @@ public class ControllerAdministrador {
 	 * 
 	*/
 	
+	//LOGICA GALERIA
 	
-	
-	
-	public static void agregarPieza(String titulo, String año, String tipo ,String propietario) throws Exception {
-		agregarPieza(titulo, año, tipo, propietario);
+	public boolean verificarComprador(String nombreCliente){
+		HashMap<String,Cliente> mapaParticipantesSubasta = datosGaleria.getMapaParticipantesSubasta();
+		HashMap<String,Cliente> mapaClientes = datosEmpresa.getMapaClientes();
+		boolean verificador=false;
+		for(Cliente cliente:mapaClientes.values()) {
+			if (cliente.getNombre().equals(nombreCliente)==false) {
+				verificador = true;
+				mapaParticipantesSubasta.put(nombreCliente, cliente);
+			}
+		}
+		return verificador;
 	}
 	
-
-	
-	public static String crearLineaEmpleado(String id, String nombre, String usuario, String contrasena, String email, String sede) {
-
-		return id + ";" + nombre + ";" + usuario + ";" + contrasena + ";" + email + ";"+ sede;
+	public boolean ConfirmarVenta(String name, String nombrePieza) throws IOException 
+	{
+		HashMap<String,Venta> mapaVentas = datosGaleria.getMapaVentas();
+		
+		Boolean estadoVenta=false;
+		for(Venta venta : mapaVentas.values()) {
+			if (venta.getUsuario().equals(name)==true && venta.getTituloPieza().equals(nombrePieza)==true ) {
+				venta.setVentaConfirmada(true);
+				datosGaleria.getMapaVentas().replace(venta.getUsuario(), venta);
+				estadoVenta=true;
+				datosGaleria.actualizarArchivoVenta();
+			}
+		}
+		return estadoVenta;
+		 
 	}
 	
-	public String crearLineaPieza(Pieza pieza) {
-		String titulo = pieza.getTitulo();
-		String anoCreacion = pieza.getAnoCreacion();
-		String tipo = pieza.getTipo();
-		String propietario = pieza.getPropietario();
-		// Aqui van los condicionales que indican segun el TIPO de pieza, que informacion perdile al admin
-		String dimension = pieza.getDimension();
-		String material = pieza.getMaterial();
-		String peso = pieza.getPeso();
-		String electricidad = pieza.getElectricidad();
-		String detalles = pieza.getDetalles();
-		String str = titulo + ";" + anoCreacion + ";" + tipo + ";" + propietario + ";" + dimension + ";"
-				+ material + ";" + peso + ";" + electricidad + ";" + detalles;
-		return str;
+	public void crearSubasta(Subasta subasta) throws Exception {
+		
+	}
+	
+	//Despues de verificar el comprador se ejecuta:
+	public int maximoCompras(Cliente cliente) {
+		HashMap<String,Cliente> mapaParticipantesSubasta = datosGaleria.getMapaParticipantesSubasta();
+		return 0;
+	}
+	
+	public static void agregarPiezaAGaleria(Pieza pieza, Galeria galeria) {
+		
+	}
+		
+	//LOGICA INVENTARIO
+	
+	public static void agregarPiezaAInventario(Pieza pieza) {
+		
 	}
 	
 	
-    
+	
     
     public static void agregarLineaEmpleados(String archivo, String nuevaLinea) {
         try {
@@ -105,42 +136,12 @@ public class ControllerAdministrador {
         }
     }
     
-    public static void eliminarLineaPiezas(String archivo, String titulo) {
-        try {
-            // Abre el archivo original y un archivo temporal para escritura
-            BufferedReader reader = new BufferedReader(new FileReader(archivo));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("data/tempPiezas.txt"));
-            String lineaActual;
-
-            // Lee l�nea por l�nea y copia todas las l�neas excepto las que contienen el fragmento
-            while ((lineaActual = reader.readLine()) != null) {
-                if (!lineaActual.contains(titulo)) {
-                    writer.write(lineaActual + System.getProperty("line.separator"));
-                }
-            }
-
-            // Cierra los archivos
-            reader.close();
-            writer.close();
-
-            // Borra el archivo original y renombra el archivo temporal
-            if (new File(archivo).delete()) {
-                new File("data/tempPiezas.txt").renameTo(new File(archivo));
-                System.out.println("Carro eliminado exitosamente.");
-            } else {
-                System.out.println("No se pudo eliminar la Pieza");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
     
 	public void actualizarDatos() throws IOException {
 		// los datos de todas las calses BasesDatos... :
 		datosEmpresa.cargarDatosEmpresa();
 	}
-    
     
 
 }

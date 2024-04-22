@@ -19,8 +19,6 @@ public class Administrador implements Usuario {
     }
     
     
-	
-
 	public String getUsuario()
 	{
 		return usuario;

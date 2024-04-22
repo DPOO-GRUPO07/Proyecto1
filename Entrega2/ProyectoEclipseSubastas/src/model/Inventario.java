@@ -3,6 +3,8 @@ package model;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import pieza.Pieza;
+
 public class Inventario {
 
 	private Administrador administrador;

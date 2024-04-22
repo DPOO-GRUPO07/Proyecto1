@@ -1,0 +1,2 @@
+David;La Virgen de las Rocas;10;subasta;false
+Tatiana;Las Meninas;20;directo;false

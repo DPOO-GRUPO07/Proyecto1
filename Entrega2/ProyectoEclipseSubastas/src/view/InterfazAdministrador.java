@@ -12,11 +12,13 @@ import model.Empleado;
 
 public class InterfazAdministrador {
 	public static ControllerAdministrador elAdministrador;
+	public static ControllerAdministrador laPieza;
 	public static void correrAdministrador(BaseDatosEmpresa datos) throws Exception
 	{
 		System.out.println("Bienvenido Administrador");
-		elAdministrador= new ControllerAdministrador();
-		elAdministrador.setDatos(datos); // Creamos instancia del controlador y añadimos los datos
+		elAdministrador = new ControllerAdministrador();
+		elAdministrador.setDatosEmpresa(datos); // Creamos instancia del controlador y añadimos los datos
+		
 		// para trabajar
 		
 		boolean continuar = true;
@@ -27,8 +29,10 @@ public class InterfazAdministrador {
 				mostrarMenu();
 				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
 				if (opcion_seleccionada == 1) {
-					LogIn();
-				    boolean continuar2 = true;
+					boolean continuar2 = LogIn();
+					if (continuar2==false) {
+						System.out.println("No se pudo inicar sesion");
+					}
 					while (continuar2) 
 					{
 						try
@@ -37,32 +41,38 @@ public class InterfazAdministrador {
 							int opcion_seleccionada2 = Integer.parseInt(input("Ingresa una opcion "));
 							if (opcion_seleccionada2 == 1) {
 								
-								String placa=input("Ingrese el Titulo del la Pieza");
-								String marca=input("Ingrese el año de creacion");
-								String modelo=input("Ingrese el lugar de creacion");
-								String color=input("Ingrese el Tipo de pieza");
-								String transmision=input("Ingrese el nombre del propietario de la pieza, si no tiene puede colocar N/A");
+								String titulo=input("Ingrese el Titulo del la Pieza");
+								int ano=Integer.parseInt(input("Ingrese el año de creacion"));
+								String lugar=input("Ingrese el lugar de creacion");
+								String propietario=input("Ingrese el nombre del propietario de la pieza, si no tiene puede colocar N/A");
+								int valorFijo=Integer.parseInt(input("Ingrese el valor fijo"));
+								String tipo=input("Ingrese el Tipo de pieza");
 								
 							}
 							else if (opcion_seleccionada2 == 2) {
-								String id=input("Ingrese el usuario del comprador");
+								String userName= input("Ingrese el usuario del comprador");
+								String namePieza = input("Ingrese el Titulo de la pieza");
+								if (elAdministrador.ConfirmarVenta(userName, namePieza)) {
+									System.out.println("La venta del Comprador "+ userName + " fue aceptada");
+								}
+								else {
+									System.out.println("La confirmacion no fue aceptada");
+								}
 							}
-							else if (opcion_seleccionada2 == 3) {
-								String id=input("Ingrese el documento de identidad del empleado");
-								String nombre=input("Ingrese el nombre del empleado");
-								String usuario=input("Asigne un nombre de usuario para el ingreso del empleado");
-								String contrasena=input("Asigne un password para la contrasena del usuario");
-								String email=input("Ingrese el email del empleado");
-								String sede = input ("Ingrese la sede a la que pertece el empleado");
-								String crearLineaEmpleado = ControllerAdministrador.crearLineaEmpleado(id, nombre, usuario, contrasena, email, sede);
-								ControllerAdministrador.agregarLineaEmpleados("data/empleados.txt", crearLineaEmpleado);
-								
-								//String sede=input("Ingrese la sede a la que pertenece el empleado");
-								//Empleado empleado = new Empleado(id,nombre,usuario,contrasena,email);
-								//String lineaEliminar= ControllerAdministrador.agregarEmpleado(empleado);
-								//ControllerAdministrador.agregarEmpleado(id, nombre, usuario, contrasena, email, sede);
+							else if (opcion_seleccionada2 ==3) {
+								String userName= input("Ingrese el nombre de usuario del cliente que va entrar a la Subasta");
+								boolean estadoVerificacion = elAdministrador.verificarComprador(userName);
+								if (estadoVerificacion==true) {
+									System.out.println("El usuario "+ userName + " fue verificado exitosamente");
+								}
+								else {
+									System.out.println("El usuario no esta registrado en el sistema no se puede VERIFICAR");
+								}
 							}
 							else if (opcion_seleccionada2 == 4) {
+								
+							}
+							else if (opcion_seleccionada2 == 5) {
 								String usuario=input("");
 								
 						    }
@@ -71,6 +81,7 @@ public class InterfazAdministrador {
 						{
 							System.out.println("Debe seleccionar uno de los números de las opciones.");
 						}
+
 					}
 				}
 				else if (opcion_seleccionada == 2)
@@ -120,17 +131,27 @@ public class InterfazAdministrador {
 		{
 			System.out.println("\nMENU ADMINISTRADOR");
 			System.out.println("1. Registrar Pieza en el Inventario");
-			System.out.println("2. Registrar Pieza Vendida");
-			System.out.println("3. Habilitar comprador");
-			System.out.println("4. Modificar estado de la Pieza");
+			System.out.println("2. Confirmar Venta");
+			System.out.println("3. Verificar comprador");
+			System.out.println("4. Crear subasta");
+			System.out.println("5. Modificar estado de la Pieza");
 			
 		}
 		
-		public static void LogIn() {
+		
+		
+		public static void mostrarMenu3()
+		{
+			System.out.println("\nOpciones de la aplicación\n");
+			System.out.println("1. Ajustar maximo de compras para el cliente");
+			System.out.println("2. Salir de la aplicacion");
+		}
+		
+		private static boolean LogIn() {
 			
-			String usuario = input("Usuario ");
-			String contrasena = input("contraseña ");
-			
+			boolean login=false;
+			String usuario = input("Usuario: ");
+			String contrasena = input("contraseña: ");
 			
 			elAdministrador.LogIn(usuario, contrasena);
 			if(elAdministrador.getAdministrador().equals(null)) {
@@ -138,8 +159,10 @@ public class InterfazAdministrador {
 				
 			}
 			else {
-				System.out.println("Ingresado correctamente");	
+				System.out.println("Ingresado correctamente");
+				login=true;
 			}
+			return login;
 		}
 
   

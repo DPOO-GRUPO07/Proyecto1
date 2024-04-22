@@ -1,37 +1,33 @@
-package model;
+package pieza;
 
 public class Pieza {
     private String titulo;
-    private String anoCreacion;
+    private int anoCreacion;
     private String lugarCreacion;
-    private String tipo;
     private String propietario;
-    private String dimension;
-    private String material;
-    private String peso;
-    private String necesitaElectricidad;
-    private String detalles;
+    private int valorFijo; 
+    private boolean disponibleEnSubasta;
+    private String tipo;
+    private boolean bloqueada;
 
-    public Pieza(String titulo, String anoCreacion, String lugarCreacion, String tipo, String propietario, String dimension, String material, String peso, String necesitaElectricidad, String detalles) {
+    public Pieza(String titulo, int anoCreacion, String lugarCreacion, String propietario, int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada) {
         this.titulo = titulo;
         this.anoCreacion = anoCreacion;
         this.lugarCreacion = lugarCreacion;
-        this.tipo = tipo;
         this.propietario = propietario;
-        this.dimension = dimension;
-        this.material = material;
-        this.peso = peso;
-        this.necesitaElectricidad = necesitaElectricidad;
-        this.detalles = detalles;
+        this.valorFijo = valorFijo;
+        this.disponibleEnSubasta = disponibleEnSubasta;
+        this.tipo = tipo;
+        this.bloqueada = bloqueada;
     }
 
     // Getters y Setters
     // 
     
 	public String getTitulo() {
-		return this.titulo;
+		return titulo;
 	}
-	public String getAnoCreacion() {
+	public int getAnoCreacion() {
 		return anoCreacion;
 	}
 	public String getLugarCreacion() {
@@ -39,36 +35,44 @@ public class Pieza {
 	}
 
 	
-	public String getTipo() {
-		return tipo;
-	}
-	
 	public String getPropietario() {
 		return this.propietario;
 	}
 	
-	public String getDimension() {
-		return this.dimension;
+	public int getValorFijo() {
+		return this.valorFijo;
 	}
 	
-	public String getMaterial() {
-		return this.material;
+	public boolean getDisponibleSubasta() {
+		return this.disponibleEnSubasta;
 	}
 	
-	public String getPeso() {
-		return this.peso;
+	public String getTipo() {
+		return tipo;
 	}
 	
-	public String getElectricidad() {
-		return this.necesitaElectricidad;
+	public boolean getBloqueo() {
+		return bloqueada;
 	}
 	
-	public String getDetalles() {
-		return this.detalles;
+
+	//Setters
+	
+	
+	public String setTitulo(String nuevoTitulo) {
+		return nuevoTitulo;
 	}
 	
-	public Cliente cambiarPropietario(Cliente nuevoPropietario) {
-		return null;
+	public String setAnoCreacion(String nuevoAno) {
+		return nuevoAno;
+	}
+	
+	public String setTipo(String nuevoTipo) {
+		return nuevoTipo;
+	}
+	
+	public String serPropietario(String nuevoPropietario) {
+		return nuevoPropietario;
 	}
 
 

@@ -1,5 +1,9 @@
 package model;
 
-public class Galeria {
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
+public class Galeria {
+	
+	
 }

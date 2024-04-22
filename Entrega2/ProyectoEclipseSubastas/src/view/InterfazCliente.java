@@ -5,15 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import controller.BaseDatosEmpresa;
+import controller.BaseDatosGaleria;
 import controller.ControllerCliente;
 
 public class InterfazCliente {
 	public static ControllerCliente elCliente;
+	private static BaseDatosGaleria datosGaleria;
 	public static void correrCliente(BaseDatosEmpresa datos) throws IOException
 	{
 		System.out.println("Bienvenido cliente");
 		elCliente= new ControllerCliente();
-		elCliente.setDatos(datos); // Creamos instancia del controlador y añadimos los datos
+		elCliente.setDatosGaleria(datosGaleria); // Creamos instancia del controlador y añadimos los datos
 		// para trabajar
 		
 		boolean continuar = true;
@@ -23,30 +25,44 @@ public class InterfazCliente {
 			{
 				mostrarMenu();
 				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
-				if (opcion_seleccionada == 1)
-					login();
-				else if (opcion_seleccionada == 2 && elCliente.getCliente() != null)
-					realizarCompra();
-
-				else if (opcion_seleccionada == 3)
-				{
-					cargarDatos();
-					System.out.println("Saliendo de la aplicación ...");
-					continuar = false;
+				if (opcion_seleccionada == 1) {
+					boolean continuar2 = LogIn();
+					if (continuar2==false) {
+						System.out.println("No se pudo inicar sesion");
+					}
+				    while (continuar2) 
+					{
+						try
+						{
+							mostrarMenu2();
+							int opcion_seleccionada2 = Integer.parseInt(input("Ingresa una opcion "));
+				            if (opcion_seleccionada == 1 && elCliente.getCliente() != null) {
+				            	realizarCompra();
+				            }
+				            else if (opcion_seleccionada == 2){
+					           cargarDatos();
+					           System.out.println("Saliendo de la aplicación ...");
+					           continuar = false;
+				            }
+				            else if (elCliente == null){
+					            System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
+				            }
+						}   
+						catch (NumberFormatException e)
+							{
+								System.out.println("Debe seleccionar uno de los números de las opciones.");
+						}
+					}
+				 }
+				 else {
+						System.out.println("Saliendo de la aplicación ...");
+						continuar = false;
+				  }
 				}
-				else if (elCliente == null)
+				catch (NumberFormatException e)
 				{
-					System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
+					System.out.println("Debe seleccionar uno de los números de las opciones.");
 				}
-				else
-				{
-					System.out.println("Por favor seleccione una opción válida.");
-				}
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("Debe seleccionar uno de los números de las opciones.");
-			}
 		}
 	}
 
@@ -68,8 +84,7 @@ public class InterfazCliente {
 		{
 			System.out.println("\nOpciones de la aplicación\n");
 			System.out.println("1. LogIn");
-			System.out.println("2. Vender o Comprar");
-			System.out.println("3. LogOut");
+			System.out.println("2. Salir de la aplicacion");
 
 	   }
 		
@@ -83,7 +98,8 @@ public class InterfazCliente {
 		}
 		
 		
-		public static void login() {
+		private static boolean LogIn() {
+			boolean login=false;
 			String usuario =input("Usuario: ");
 			String contrasena =input("contraseña: ");
 			
@@ -93,27 +109,22 @@ public class InterfazCliente {
 				
 			}
 			else {
-				System.out.println("Ingresado correctamente");	
+				System.out.println("Ingresado correctamente");
+				login=true;
 			}
+			return login;
 		}
 		
-public static void realizarCompra() {
-	String nombrePieza=input("Titulo o nombre de la pieza: ");
-
-	double cobro=elCliente.realizarCompra(nombrePieza);
-	
-	if(cobro!=0) {
-	System.out.println("Su compra se realizo exitosamente"
-			+cobro );
-	}
-	else{
-		System.out.println("No hay piezas disponibles");
-	}
-
-	}
-public static void cargarDatos() throws IOException {
-	elCliente.actualizarDatos();
-}
+       public static void realizarCompra() {
+    	   String nombrePieza=input("Titulo o nombre de la pieza: ");
+    	   
+    	   //SString userNameCliente= elCliente.getCliente();
+	       //double cobro=elCliente.realizarCompra(nombrePieza);
+       }
+       
+       public static void cargarDatos() throws IOException {
+    	   elCliente.actualizarDatos();
+       }
 
 }
 

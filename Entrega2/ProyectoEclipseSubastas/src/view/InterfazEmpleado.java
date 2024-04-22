@@ -80,7 +80,7 @@ public static void actualizarCarro()
 	LocalDateTime fecha = LocalDateTime.now();
 	int dias = Integer.parseInt(input("Inserte el n�mero de d�as que necesuta el carro en limpieza o manentenimiento (max 2)"));
 	
-	elEmpleado.ActualizarCarro(placa, fecha, dias);
+	
 	
 }
 
@@ -89,7 +89,7 @@ public static void actualizarCarro()
 private static void cumplimientoFechaCarro()
 {
 	LocalDateTime fecha = LocalDateTime.now();
-	elEmpleado.cumplimientoFechaCarro(fecha);
+	
 	
 }
 

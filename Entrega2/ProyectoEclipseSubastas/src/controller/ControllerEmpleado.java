@@ -7,10 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import model.Cliente;
 import model.Empleado;
-import model.Pieza;
+import pieza.Pieza;
 
 
 public class ControllerEmpleado {
