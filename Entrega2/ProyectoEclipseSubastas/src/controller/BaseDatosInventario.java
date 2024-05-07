@@ -156,7 +156,7 @@ public class BaseDatosInventario {
 		fichero.close();
 	}
 	
-	public void descargarInventario() throws IOException {
+	public void descargarDatosInventario() throws IOException {
 		crearMapaPiezas();// Incompleto
 
 	}

@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 
 import controller.BaseDatosEmpresa;
+import controller.BaseDatosGaleria;
+import controller.BaseDatosInventario;
 import controller.ControllerCliente;
 import controller.ControllerEmpleado;
 import model.Compra;
@@ -19,7 +21,7 @@ public class InterfazEmpleado {
 	private static BaseDatosEmpresa datos;
 	
 	
-	public static void correrEmpleado(BaseDatosEmpresa datos) throws IOException
+	public static void correrEmpleado(BaseDatosEmpresa datos, BaseDatosInventario datosInventario, BaseDatosGaleria datosGaleria) throws IOException
 	{
 		System.out.println("Bienvenido cliente");
 		elEmpleado= new ControllerEmpleado(datos);

@@ -52,7 +52,7 @@ public class BaseDatosEmpresa{
 		fichero.close();
 	}
 	
-	// ADMINISTRADOR
+	// ADMINISTRADOR READ
 		public String comprimirAdministrador(Administrador administrador) {
 			String usuario = administrador.getUsuario();
 			String contrasena = administrador.getContrasena();

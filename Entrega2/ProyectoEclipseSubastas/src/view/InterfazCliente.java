@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import controller.BaseDatosInventario;
 import controller.BaseDatosEmpresa;
 import controller.BaseDatosGaleria;
 import controller.ControllerCliente;
@@ -11,7 +12,7 @@ import controller.ControllerCliente;
 public class InterfazCliente {
 	public static ControllerCliente elCliente;
 	private static BaseDatosGaleria datosGaleria;
-	public static void correrCliente(BaseDatosEmpresa datos) throws IOException
+	public static void correrCliente(BaseDatosEmpresa datos, BaseDatosInventario datosInventario, BaseDatosGaleria datosGaleria) throws IOException
 	{
 		System.out.println("Bienvenido cliente");
 		elCliente= new ControllerCliente();

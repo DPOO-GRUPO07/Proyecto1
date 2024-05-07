@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import controller.BaseDatosEmpresa;
+import controller.BaseDatosGaleria;
+import controller.BaseDatosInventario;
 import controller.ControllerAdministrador;
 import controller.ControllerEmpleado;
 import model.Empleado;
@@ -13,7 +15,7 @@ import model.Empleado;
 public class InterfazAdministrador {
 	public static ControllerAdministrador elAdministrador;
 	public static ControllerAdministrador laPieza;
-	public static void correrAdministrador(BaseDatosEmpresa datos) throws Exception
+	public static void correrAdministrador(BaseDatosEmpresa datos, BaseDatosInventario datosInventario, BaseDatosGaleria datosGaleria) throws Exception
 	{
 		System.out.println("Bienvenido Administrador");
 		elAdministrador = new ControllerAdministrador();

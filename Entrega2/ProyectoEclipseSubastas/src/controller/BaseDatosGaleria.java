@@ -137,11 +137,11 @@ public class BaseDatosGaleria {
 			}
 	    
 
-	public void descargarDatosEmpresa() throws IOException {
+	public void descargarDatosGaleria() throws IOException {
 			crearMapaClientesSubasta();
 			crearMapaVentas();
 		}
-	public void cargarDatosEmpresa() throws IOException {
+	public void cargarDatosGaleria() throws IOException {
 
 			actualizarArchivoParticipantesSubasta();
 			actualizarArchivoVenta();

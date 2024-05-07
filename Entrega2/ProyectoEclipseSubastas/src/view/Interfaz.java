@@ -8,6 +8,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import controller.BaseDatosEmpresa;
+import controller.BaseDatosInventario;
+import controller.BaseDatosGaleria;
+
 
 //Importacion de las clases que modifican los datos, ubicadas en el model:
 //import controller.BaseDatos;
@@ -17,13 +20,16 @@ public class Interfaz {
 	//private static BaseDatosInventario datosInventario;
     //private static BaseDatosSubastas datosCompraSubastas;
 	private static BaseDatosEmpresa datosEmpresa;
+	private static BaseDatosInventario datosInventario;
+	private static BaseDatosGaleria datosGaleria;
+	
 	public void ejecutarInterfaz() throws Exception
 	{
 		System.out.println("Casa de Ventas y Subastas");
 
 		boolean continuar = true;
-		//cargarDatosInventario();
-		//cargarDatosSubasta();
+		cargarDatosInventario();
+		cargarDatosGaleria();
 		cargarDatosEmpresa();
 		while (continuar)
 		{
@@ -33,11 +39,11 @@ public class Interfaz {
 				
 				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
 				if (opcion_seleccionada == 1)
-					InterfazCliente.correrCliente(datosEmpresa);
-				else if (opcion_seleccionada == 2 && datosEmpresa != null)
-					InterfazEmpleado.correrEmpleado(datosEmpresa);
-				else if (opcion_seleccionada == 3 && datosEmpresa != null)
-					InterfazAdministrador.correrAdministrador(datosEmpresa);
+					InterfazCliente.correrCliente(datosEmpresa, datosInventario, datosGaleria);
+				else if (opcion_seleccionada == 2 && datosEmpresa != null && datosInventario != null && datosGaleria != null)
+					InterfazEmpleado.correrEmpleado(datosEmpresa, datosInventario, datosGaleria);
+				else if (opcion_seleccionada == 3 && datosEmpresa != null && datosInventario != null && datosGaleria != null)
+					InterfazAdministrador.correrAdministrador(datosEmpresa, datosInventario, datosGaleria);
 					
 				else if (opcion_seleccionada == 4)
 				{
@@ -82,33 +88,67 @@ public class Interfaz {
 			}
 			return null;
 		}
+		//carga datos Empresa
 		public static BaseDatosEmpresa cargarDatosEmpresa() {
-			//System.out.println("Cargando datos: ");
-
-
 			try
 			{
 				datosEmpresa = new BaseDatosEmpresa();
-				//datosCompraSubasta = new PersistenciaCompraSubasta();
 				datosEmpresa.descargarDatosEmpresa();
-				//System.out.println("Se actualizaron los datos");
 				return datosEmpresa;
 			}
-			catch (FileNotFoundException e)
-			{
+			catch (FileNotFoundException e){
 				System.out.println("ERROR: el archivo indicado no se encontró.");
 				return null;
 			}
 				
-			catch (IOException e)
-			{
+			catch (IOException e){
 				System.out.println("ERROR: hubo un problema leyendo el archivo.");
 				System.out.println(e.getMessage());
 				return null;
 			}
-			
 		}
-  public static void main(String[] args) throws Exception {
+		
+		//Carga datos Inventario
+		
+		public static BaseDatosInventario cargarDatosInventario() {
+			try
+			{
+				datosInventario = new BaseDatosInventario();
+				datosInventario.descargarDatosInventario();
+				return datosInventario;
+			}
+			catch (FileNotFoundException e){
+				System.out.println("ERROR: el archivo indicado no se encontró.");
+				return null;
+			}
+				
+			catch (IOException e){
+				System.out.println("ERROR: hubo un problema leyendo el archivo.");
+				System.out.println(e.getMessage());
+				return null;
+			}
+		}
+	
+		//Carga datos Galeria
+		public static BaseDatosGaleria cargarDatosGaleria() {
+			try
+			{
+				datosGaleria = new BaseDatosGaleria();
+				datosGaleria.descargarDatosGaleria();
+				return datosGaleria;
+			}
+			catch (FileNotFoundException e){
+				System.out.println("ERROR: el archivo indicado no se encontró.");
+				return null;
+			}
+				
+			catch (IOException e){
+				System.out.println("ERROR: hubo un problema leyendo el archivo.");
+				System.out.println(e.getMessage());
+				return null;
+			}
+		}
+      public static void main(String[] args) throws Exception {
 	  Interfaz consola = new Interfaz();
 	  consola.ejecutarInterfaz();
   }
