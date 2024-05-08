@@ -34,7 +34,7 @@ public class BaseDatosInventario {
 	String linea = br.readLine();
 
 	while (linea != null) {
-		String[] partes = linea.split(";");
+		String[] partes = linea.split(",");
 		String titulo = partes[0];
 		Pieza pieza = descomprimirPieza(linea);
 		mapaPiezas.put(titulo,pieza);
@@ -44,43 +44,44 @@ public class BaseDatosInventario {
 	}
 	
 	public Pieza descomprimirPieza(String linea) {
-		String[] partes = linea.split(";");
+		String[] partes = linea.split(",");
 		String titulo = partes[0];
-		int anoCreacion = Integer.parseInt(partes[1]);
-		String lugarCreacion = partes[2];
-		String propietario = partes[3];
-		int valorFijo=Integer.parseInt(partes[4]);
-		Boolean disponibleEnSubasta= Boolean.parseBoolean(partes[5]);
-		String tipo=partes[6];
-		boolean bloqueada = Boolean.parseBoolean(partes[7]);
-		Pieza pieza = new Pieza(titulo, anoCreacion, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
-		if (tipo=="pintura") {
-			String tipoPintura=partes[8];
-			String dimensiones=partes[9];
-			String detalles=partes[10];
-			pieza = new PiezaPintura(titulo, anoCreacion, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada, tipoPintura, dimensiones, detalles);
+		int anoCreacion = Integer.parseInt(partes[1].trim());
+		String artista = partes[2];
+		String lugarCreacion = partes[3];
+		String propietario = partes[4];
+		int valorFijo=Integer.parseInt(partes[5].trim());
+		Boolean disponibleEnSubasta= Boolean.parseBoolean(partes[6]);
+		String tipo=partes[7];
+		boolean bloqueada = Boolean.parseBoolean(partes[8]);
+		Pieza pieza = new Pieza(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
+		if ("pintura".equals(tipo)) {
+			String tipoPintura=partes[9];
+			String dimensiones=partes[10];
+			String detalles=partes[11];
+			pieza = new PiezaPintura(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada, tipoPintura, dimensiones, detalles);
 		}
-		else if (tipo=="escultura") {
-			float alto=Float.parseFloat(partes[8]);
-			float ancho=Float.parseFloat(partes[9]);
-			float profundidad=Float.parseFloat(partes[10]);
-			String material=partes[11];
-			float peso=Float.parseFloat(partes[12]);
-			Boolean necesitaElectricidad = Boolean.parseBoolean(partes[13]);
-			String detallesInstalacion=partes[14];
-			pieza=new PiezaEscultura(titulo, anoCreacion, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
+		else if ("Escultura".equals(tipo)) {
+			float alto=Float.parseFloat(partes[9]);
+			float ancho=Float.parseFloat(partes[10]);
+			float profundidad=Float.parseFloat(partes[11]);
+			String material=partes[12];
+			float peso=Float.parseFloat(partes[13]);
+			Boolean necesitaElectricidad = Boolean.parseBoolean(partes[14]);
+			String detallesInstalacion=partes[15];
+			pieza=new PiezaEscultura(titulo, anoCreacion,artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
 		}
-		else if (tipo=="fotografia") {
-			float alto = Float.parseFloat(partes[8]);
-			float largo = Float.parseFloat(partes[9]);
-			String color = partes[10];
-			pieza = new PiezaFotografia(titulo, anoCreacion, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada, alto, largo, color);
+		 else if ("fotografia".equals(tipo)) {
+			float alto = Float.parseFloat(partes[9]);
+			float largo = Float.parseFloat(partes[10]);
+			String color = partes[11];
+			pieza = new PiezaFotografia(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada, alto, largo, color);
 			
 		}
-		else if (tipo=="video") {
-			float duracion = Float.parseFloat(partes[8]);
-			String largo = partes[9];
-			pieza = new PiezaVideo(titulo, anoCreacion, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,duracion, largo);
+		 else if ("video".equals(tipo))  {
+			float duracion = Float.parseFloat(partes[9]);
+			String largo = partes[10];
+			pieza = new PiezaVideo(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,duracion, largo);
 		}
 
 		
@@ -102,12 +103,13 @@ public class BaseDatosInventario {
 	public String comprimirPieza(Pieza pieza) {
 		String titulo = pieza.getTitulo();
 		String anoCreacion = String.valueOf(pieza.getAnoCreacion());
+		String artista = pieza.getArtista();
 		String lugarCreacion = pieza.getLugarCreacion();
 		String propietario = pieza.getPropietario();
 	    String valorFijo = String.valueOf(pieza.getValorFijo()); 
 	    String disponibleEnSubasta = String.valueOf(pieza.getDisponibleSubasta());
 		String tipo = pieza.getTipo();
-		String str = titulo + ";" + anoCreacion + ";" + lugarCreacion + ";" + propietario + ";"
+		String str = titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
 				+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo ;
 		if(tipo=="pintura") {
 			PiezaPintura piezaPintura = (PiezaPintura) pieza;
@@ -115,7 +117,7 @@ public class BaseDatosInventario {
 			String dimensiones = piezaPintura.getDimensiones();
 			String detalles = piezaPintura.getDetalles();
 			
-			str = titulo + ";" + anoCreacion + ";" + lugarCreacion + ";" + propietario + ";"
+			str = titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
 					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + tipoPintura + ";" + dimensiones + ";" + detalles; 
 			
 		}
@@ -129,7 +131,7 @@ public class BaseDatosInventario {
 			String necesitaElectricidad= String.valueOf(piezaEscultura.getNecesitaElectricidad());
 			String detallesInstalacion = piezaEscultura.getDetallesInstalacion();
 			
-			str=titulo + ";" + anoCreacion + ";" + lugarCreacion + ";" + propietario + ";"
+			str=titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
 					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + ";" + alto + ";" + 
 					ancho + ";" + profundidad + ";" + material + ";" + peso + ";" + necesitaElectricidad + ";" + detallesInstalacion;
 					
@@ -140,7 +142,7 @@ public class BaseDatosInventario {
 			String alto = String.valueOf(piezaFotografia.getAlto());
 			String ancho = String.valueOf(piezaFotografia.getLargo());
 			String profundidad = String.valueOf(piezaFotografia.getColor());
-			str=titulo + ";" + anoCreacion + ";" + lugarCreacion + ";" + propietario + ";"
+			str=titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
 					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + alto + ";" + ancho + ";" + profundidad;
 		}
 
@@ -167,5 +169,26 @@ public class BaseDatosInventario {
 		
 	}
 	
+	// Revisar 
 	
+	public String obtenerHistoriaPieza(String tituloPieza) {
+	    Pieza pieza = mapaPiezas.get(tituloPieza);
+	    if (pieza != null) {
+	        StringBuilder historia = new StringBuilder(); // Aquí se crea el StringBuilder para construir la historia
+	        historia.append("Historia de la pieza: ").append(tituloPieza).append("\n");
+	        historia.append("Año de creación: ").append(pieza.getAnoCreacion()).append("\n");
+	        historia.append("Artista: ").append(pieza.getArtista()).append("\n");
+	        historia.append("Lugar de creación: ").append(pieza.getLugarCreacion()).append("\n");
+	        historia.append("Propietario: ").append(pieza.getPropietario()).append("\n");
+	        historia.append("Valor fijo: ").append(pieza.getValorFijo()).append("\n");
+	        historia.append("Disponible en subasta: ").append(pieza.getDisponibleSubasta()).append("\n");
+	        historia.append("Historial de transacciones:").append("\n");
+	        for (String transaccion : pieza.getHistorialTransacciones()) {
+	            historia.append(transaccion).append("\n");
+	        }
+	        return historia.toString(); // Aquí se convierte el StringBuilder a una cadena para devolverla
+	    } else {
+	        return "No se encontró la pieza con el título: " + tituloPieza;
+	    }
+	}
 }
