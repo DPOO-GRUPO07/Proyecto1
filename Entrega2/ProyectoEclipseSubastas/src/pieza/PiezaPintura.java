@@ -6,9 +6,9 @@ public class PiezaPintura extends Pieza {
     private String dimensiones;
     private String detalles;
 	
-	public PiezaPintura(String titulo, int anoCreacion, String lugarCreacion, String propietario,
+	public PiezaPintura(String titulo, int anoCreacion, String artista, String lugarCreacion, String propietario,
 			int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada,String tipoPintura, String dimensiones, String detalles) {
-		super(titulo, anoCreacion, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
+		super(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
 		// TODO Auto-generated constructor stub
 		this.tipoPintura=tipoPintura;
 		this.dimensiones=dimensiones;
