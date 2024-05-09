@@ -66,28 +66,9 @@ public class ControllerEmpleado {
 		return this.empleado;
 	}
 	
-	private Pieza Disponibilidad(Pieza pieza)
-	{
+	private Pieza Disponibilidad(Pieza pieza){
 		boolean disponible= false;
 		
-		for (Pieza carro:pieza.getPieza())
-		{
-			ArrayList<Reserva> reservas = carro.getReservas();
-			
-			if (reservas.isEmpty())
-			{disponible = true;}
-			else {
-			for (Reserva reserva:reservas)
-			{
-				disponible = hayInterseccionIntervaloReservaConFechas( reserva, fechaInicio,fechaFin);
-				
-			}}
-			
-			if (disponible && sede.equals(carro.getSede()))
-			{
-				return carro;
-			}	
-		}
 		
 		return null;	
 	}
@@ -95,27 +76,11 @@ public class ControllerEmpleado {
 
 
 
-public ArrayList<String> getFactura()
-{
-	ArrayList<String> datos = new ArrayList<String>();
-	
-	String id= alquiler.getFactura().getId();
-	datos.add(id);
-	String pagoAnticipado = String.valueOf( alquiler.getFactura().getPagoAnticipado());
-	datos.add(pagoAnticipado);
-	String precioLicencias = String.valueOf(alquiler.getFactura().getPrecioLicencias());
-	datos.add(precioLicencias);
-	String total = String.valueOf(alquiler.getFactura().getTotal());
-	datos.add(total);
-	
-	return datos;
-}
-
 
 //Actualizar Dtaos
 		
 		public void actualizarDatos() throws IOException {
-			datos.cargarTodosLosDatos();
+			//datos.cargarTodosLosDatos();
 		}
 		
 		
