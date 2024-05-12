@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import pieza.Pieza;
 import pieza.PiezaEscultura;
@@ -16,13 +18,16 @@ import java.util.ArrayList;
 
 public class BaseDatosInventario {
 	private HashMap<String, Pieza> mapaPiezas;
+	private HashMap<String, List<Pieza>> mapaArtistas;
 	
 	public BaseDatosInventario() {
 	    this.mapaPiezas= new HashMap<>();
+	    this.mapaArtistas = new HashMap<>();
 	}
 	
 	public HashMap<String, Pieza> getMapaPiezas(){
 		return mapaPiezas;
+		
 	}
 	
 	//Inventario
@@ -39,6 +44,7 @@ public class BaseDatosInventario {
 		Pieza pieza = descomprimirPieza(linea);
 		mapaPiezas.put(titulo,pieza);
 		linea = br.readLine();
+		
 	}
 	br.close();
 	}
@@ -46,6 +52,7 @@ public class BaseDatosInventario {
 	public Pieza descomprimirPieza(String linea) {
 		String[] partes = linea.split(",");
 		String titulo = partes[0];
+
 		int anoCreacion = Integer.parseInt(partes[1].trim());
 		String artista = partes[2];
 		String lugarCreacion = partes[3];
@@ -121,7 +128,7 @@ public class BaseDatosInventario {
 					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + tipoPintura + ";" + dimensiones + ";" + detalles; 
 			
 		}
-		else if (tipo=="escultura") {
+		else if ("Escultura".equals(tipo))  {
 			PiezaEscultura piezaEscultura = (PiezaEscultura) pieza;
 			String alto = String.valueOf(piezaEscultura.getAlto());
 			String ancho = String.valueOf(piezaEscultura.getAncho());
@@ -160,6 +167,7 @@ public class BaseDatosInventario {
 	
 	public void descargarDatosInventario() throws IOException {
 		crearMapaPiezas();// Incompleto
+		cargarMapaArtistas();  //revisar
 
 	}
 	
@@ -173,8 +181,8 @@ public class BaseDatosInventario {
 	
 	public String obtenerHistoriaPieza(String tituloPieza) {
 	    Pieza pieza = mapaPiezas.get(tituloPieza);
-	    if (pieza != null) {
-	        StringBuilder historia = new StringBuilder(); // Aquí se crea el StringBuilder para construir la historia
+	    if (pieza !=null) {
+	    	StringBuilder historia = new StringBuilder(); // Aquí se crea el StringBuilder para construir la historia
 	        historia.append("Historia de la pieza: ").append(tituloPieza).append("\n");
 	        historia.append("Año de creación: ").append(pieza.getAnoCreacion()).append("\n");
 	        historia.append("Artista: ").append(pieza.getArtista()).append("\n");
@@ -191,4 +199,52 @@ public class BaseDatosInventario {
 	        return "No se encontró la pieza con el título: " + tituloPieza;
 	    }
 	}
+	
+	/*
+    private void asignarPiezasAArtistas() {
+        for (Pieza pieza : mapaPiezas.values()) {
+            String nombreArtista = pieza.getArtista();
+            List<Pieza> piezasArtista = mapaArtistas.getOrDefault(nombreArtista, new ArrayList<>());
+            piezasArtista.add(pieza);
+            mapaArtistas.put(nombreArtista, piezasArtista);
+        }
+    }*/
+    
+    
+    
+    private void cargarMapaArtistas() throws IOException {
+        for (Pieza pieza : mapaPiezas.values()) {
+            String nombreArtista = pieza.getArtista();
+            List<Pieza> piezasArtista = mapaArtistas.getOrDefault(nombreArtista, new ArrayList<>());
+            piezasArtista.add(pieza);
+            mapaArtistas.put(nombreArtista, piezasArtista);
+        }
+    }
+    
+	public String obtenerHistoriaArtista(String nombreArtista) {
+        List<Pieza> piezasArtista = mapaArtistas.get(nombreArtista);
+
+        if (piezasArtista != null) {
+            StringBuilder historia = new StringBuilder();
+            historia.append("Historia del artista: ").append(nombreArtista).append("\n");
+
+            for (Pieza pieza : piezasArtista) {
+                historia.append("Título: ").append(pieza.getTitulo()).append("\n");
+                historia.append("Año de creación: ").append(pieza.getAnoCreacion()).append("\n");
+                historia.append("Valor fijo: ").append(pieza.getValorFijo()).append("\n");
+                historia.append("Propietario: ").append(pieza.getPropietario()).append("\n");
+        
+                historia.append("\n");
+            }
+
+            return historia.toString();
+        } else {
+            return "No se encontró el artista: " + nombreArtista;
+        }
+    }
+	
+	//pendiente probar estas funciones, hacer la del cliente y hacer la parte de 
 }
+
+
+

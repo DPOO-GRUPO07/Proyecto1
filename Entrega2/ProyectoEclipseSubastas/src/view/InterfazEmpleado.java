@@ -172,8 +172,7 @@ public static void mostrarMenu1()
 {
 		System.out.println("\nOpciones del Empleado\n");
 		System.out.println("1. Registrar Compra");
-		System.out.println("3. Modificar fecha de finalizaci�n de limpieza o mantenimiento");
-		System.out.println("4. Cambiar fecha de veh�culos que ya completaron limpieza");
+		System.out.println("2. ");
 		System.out.println("5. LogOut");
 }
 
