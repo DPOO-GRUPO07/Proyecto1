@@ -95,7 +95,7 @@ public class InterfazCliente {
 			System.out.println("1. Realizar Compra por Valor fijo");
 			System.out.println("2. Realizar Compra por medio de Subasta");
 			System.out.println("3. Vender o subastar Pieza (Consignacion)");
-			System.out.println("4. Ver piezas mi historial de piezas");
+			System.out.println("4. Ver mi historial de piezas");
 		}
 		
 		
