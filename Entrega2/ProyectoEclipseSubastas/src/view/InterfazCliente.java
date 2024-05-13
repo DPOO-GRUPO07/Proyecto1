@@ -103,15 +103,15 @@ public class InterfazCliente {
 			System.out.println("\nMENU COMPRADOR");
 			System.out.println("1. Realizar Compra por Valor fijo");
 			System.out.println("2. Realizar Compra por medio de Subasta");
-			System.out.println("3. Vender o subastar Pieza");
-			System.out.println("4. Ver piezas obtenidas");
+			System.out.println("3. Vender o subastar Pieza (Consignacion)");
+			System.out.println("4. Ver mi historial de piezas");
 		}
 		
 		
 		private static boolean LogIn() {
 			boolean login=false;
-			String usuario =input("Usuario: ");
-			String contrasena =input("contraseña: ");
+			String usuario =input("Usuario ");
+			String contrasena =input("Contraseña ");
 			
 			elCliente.LogIn(usuario, contrasena);
 			if(elCliente.getCliente().equals(null)) {

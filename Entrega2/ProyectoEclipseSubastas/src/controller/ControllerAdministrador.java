@@ -10,7 +10,6 @@ import model.Cliente;
 //import java.util.HashMap;
 //import controller.BaseDatos;
 import model.Empleado;
-import model.Galeria;
 import model.Subasta;
 import model.Venta;
 import pieza.Pieza;
