@@ -55,7 +55,7 @@ public class BaseDatosGaleria {
 		BufferedReader br = new BufferedReader(new FileReader("data/participantesSubasta.txt"));
 		String linea = br.readLine();
 		while (linea != null) {
-			String[] partes = linea.split(";");
+			String[] partes = linea.split(",");
 			String usuario = partes[0];
 			
 			Cliente cliente= descomprimirClienteSubasta(linea);
@@ -67,7 +67,7 @@ public class BaseDatosGaleria {
 	
     //READ CLIENTES DENTRO DE LA SUBASTA
 	public Cliente descomprimirClienteSubasta(String linea) {
-		String[] partes = linea.split(";");
+		String[] partes = linea.split(",");
 		String usuario = partes[0];
 		String contrasena = partes[1];
 		String nombre=partes[2];

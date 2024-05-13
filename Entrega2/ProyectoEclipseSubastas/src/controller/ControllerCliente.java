@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -7,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.Administrador;
 import model.Cliente;
 import model.Inventario;
 import model.Venta;
@@ -19,12 +22,15 @@ public class ControllerCliente {
     private BaseDatosEmpresa datos; // debe haber unos datos asociados para trabajar
     private BaseDatosInventario datosInventario;
     private BaseDatosGaleria datosGaleria;
+
      
     
     //Constructor
-    public ControllerCliente() {
-	  this.cliente=null;
-	  this.datos=null;
+    public ControllerCliente(BaseDatosEmpresa datos,BaseDatosInventario datosInventario ) {
+    	this.cliente= null;
+    	this.datos=datos;
+    	this.datosInventario = datosInventario;
+    	this.mapaPiezas= datosInventario.getMapaPiezas();
     }
     
     //METODOS
@@ -32,6 +38,7 @@ public class ControllerCliente {
     public Cliente getCliente() {
 	   return cliente;
     }
+    
     
 	public void setDatosInventario(BaseDatosInventario datosInventario) {
 		this.datosInventario=datosInventario;
@@ -41,7 +48,9 @@ public class ControllerCliente {
 		this.datosGaleria=datosGaleria;
 	}
 
-    public void logIn(String usuario,String contrasena) {
+	
+   /*
+	public void logIn(String usuario,String contrasena) {
 	   Cliente cliente = datos.getMapaClientes().get(usuario);
 	    if(cliente!=null) {
 	    	String contr=cliente.getContrasena();
@@ -54,7 +63,27 @@ public class ControllerCliente {
           }	
 	    else {
         }
-       }
+       }*/
+    
+    
+	public BaseDatosEmpresa getDatos() {
+		return datos;
+	}
+
+	public void setDatos(BaseDatosEmpresa datos) {
+		this.datos = datos;
+	}
+
+	public void LogIn(String usuario,String contrasena) {
+		Cliente cliente = datos.getMapaClientes().get(usuario);
+		
+		if(cliente.getUsuario().equals(usuario)&& cliente.getContrasena().equals(contrasena)) {
+			this.cliente=cliente;
+		}
+		else {
+			System.out.println("Error al ingresar");
+		}
+	}
 
 	/*
 	 * METODOS DE LOS REQUERIMIENTOS DEL CLIENTE
@@ -75,6 +104,36 @@ public class ControllerCliente {
 				mapaVentas.put(cliente.getUsuario(), estaVenta);
 			}
     	}
+    }
+    
+    
+    /*Para este metodo el cliente se postulara por la subasta de una pieza, indicando su nombre, el de la pieza por la que deseea hacer la puja y el valor que ofrece en la subasta*/
+    
+    public void actualizarOferta(String nombreComprador, String nombrePieza, String precioOferta) {
+        try {
+            Pieza pieza = mapaPiezas.get(nombrePieza);   // Validar si la pieza está disponible para subasta
+            if (pieza != null && pieza.getDisponibleSubasta()) {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("data/ofertaSubasta.txt", true));  // Abrir el archivo "ofertas.txt" en modo de escritura
+                writer.write(nombreComprador + "," + nombrePieza + "," + precioOferta); // Escribir la información en el archivo
+                writer.newLine();
+
+                writer.close();
+            } else {
+                System.out.println("La pieza no está disponible para subasta.");
+            }
+        } catch (IOException e) {
+            // Manejo de excepciones en caso de error al escribir en el archivo
+            e.printStackTrace();
+        }
+    }
+ 
+    	
+ 
+    
+    
+    /*Esta función permitira al cliente o dueño de una pieza poner a en venta alguna pieza*/
+    public void entregarPiezaConsignacion (String titulo, int anoCreacion,String artista, String lugarCreacion, String propietario, int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada) {
+    	
     }
     
     

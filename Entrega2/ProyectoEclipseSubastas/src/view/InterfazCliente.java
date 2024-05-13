@@ -12,10 +12,12 @@ import controller.ControllerCliente;
 public class InterfazCliente {
 	public static ControllerCliente elCliente;
 	private static BaseDatosGaleria datosGaleria;
+	
+	
 	public static void correrCliente(BaseDatosEmpresa datos, BaseDatosInventario datosInventario, BaseDatosGaleria datosGaleria) throws IOException
 	{
 		System.out.println("Bienvenido cliente");
-		elCliente= new ControllerCliente();
+		elCliente= new ControllerCliente(datos, datosInventario);
 		elCliente.setDatosGaleria(datosGaleria); // Creamos instancia del controlador y añadimos los datos
 		// para trabajar
 		
@@ -37,13 +39,20 @@ public class InterfazCliente {
 						{
 							mostrarMenu2();
 							int opcion_seleccionada2 = Integer.parseInt(input("Ingresa una opcion "));
-				            if (opcion_seleccionada == 1 && elCliente.getCliente() != null) {
+				            if (opcion_seleccionada2 == 1 && elCliente.getCliente() != null) {
 				            	realizarCompra();
 				            }
-				            else if (opcion_seleccionada == 2){
-					           cargarDatos();
-					           System.out.println("Saliendo de la aplicación ...");
-					           continuar = false;
+				            else if (opcion_seleccionada2 == 2){
+				                if (elCliente.getCliente() != null) {
+				                    String nombreCliente = input("Ingrese su nombre");
+				                    String nombrePieza = input("Ingrese el nombre de la pieza por la que desea participar en subasta");
+				                    String valorPropuesto = input("ingrese el valor propuesto");
+				                    elCliente.actualizarOferta(nombreCliente, nombrePieza, valorPropuesto);;
+				                    System.out.println("Saliendo de la aplicación ...");
+				                    continuar = false;
+				                } else {
+				                    System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
+				                }
 				            }
 				            else if (elCliente == null){
 					            System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
@@ -104,7 +113,7 @@ public class InterfazCliente {
 			String usuario =input("Usuario: ");
 			String contrasena =input("contraseña: ");
 			
-			elCliente.logIn(usuario, contrasena);
+			elCliente.LogIn(usuario, contrasena);
 			if(elCliente.getCliente().equals(null)) {
 				System.out.println("Error ingresando sesión");
 				

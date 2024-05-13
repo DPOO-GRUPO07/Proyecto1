@@ -90,9 +90,7 @@ public class BaseDatosEmpresa{
 
 	private void crearMapaClientes() throws IOException {
 	BufferedReader br = new BufferedReader(new FileReader("data/clientes.txt"));
-
 	String linea = br.readLine();
-
 	while (linea != null) {
 		String[] partes = linea.split(";");
 		String usuario = partes[0];

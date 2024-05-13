@@ -33,7 +33,7 @@ public class BaseDatosInventario {
 	//Inventario
 	//READ: Descargar todas las piezas
 
-	private void crearMapaPiezas() throws IOException {
+	public void crearMapaPiezas() throws IOException {
 	BufferedReader br = new BufferedReader(new FileReader("data/piezas.txt"));
 
 	String linea = br.readLine();
@@ -58,7 +58,7 @@ public class BaseDatosInventario {
 		String lugarCreacion = partes[3];
 		String propietario = partes[4];
 		int valorFijo=Integer.parseInt(partes[5]);
-		Boolean disponibleEnSubasta= Boolean.parseBoolean(partes[6]);
+		Boolean disponibleEnSubasta= Boolean.parseBoolean(partes[6].trim());
 		String tipo=partes[7];
 		boolean bloqueada = Boolean.parseBoolean(partes[8]);
 		Pieza pieza = new Pieza(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
