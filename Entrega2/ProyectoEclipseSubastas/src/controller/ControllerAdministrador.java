@@ -122,7 +122,7 @@ public class ControllerAdministrador {
 
 	            if (mapaClientes.containsKey(cliente)) {
 	                Cliente nuevoCliente = mapaClientes.get(cliente);
-	                // Establecer el nuevo máximo de compras para el cliente
+	                
 	                nuevoCliente.setMaximo(maximo);
 	                datosGaleria.actualizarArchivoParticipantesSubasta();
 	                return true;
@@ -157,22 +157,6 @@ public class ControllerAdministrador {
 	
 	
 	
-    
-    public static void agregarLineaEmpleados(String archivo, String nuevaLinea) {
-        try {
-            // Abre el archivo en modo de adicion
-            BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
-            
-            // Escribe la nueva linea en el archivo
-            writer.write(nuevaLinea + System.getProperty("line.separator"));
-            
-            writer.close();
-            
-            System.out.println("Nueva l�nea agregada exitosamente.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
     public List<String> historialComprasCliente(String nombreCliente) {
         return datosGaleria.obtenerHistorialComprasCliente(nombreCliente);
