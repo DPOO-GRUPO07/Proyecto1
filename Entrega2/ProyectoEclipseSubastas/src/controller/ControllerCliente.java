@@ -58,7 +58,6 @@ public class ControllerCliente {
 
 	/*
 	 * METODOS DE LOS REQUERIMIENTOS DEL CLIENTE
-	 * 
 	*/
     
     public void realizarCompraFija(String nombrePieza) {

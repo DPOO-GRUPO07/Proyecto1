@@ -202,8 +202,8 @@ public class InterfazAdministrador {
 		private static boolean LogIn() {
 	
 			boolean login=false;
-			String usuario = input("Usuario: ");
-			String contrasena = input("contraseña: ");
+			String usuario = input("Usuario");
+			String contrasena = input("Contraseña");
 			
 			elAdministrador.LogIn(usuario, contrasena);
 			if(elAdministrador.getAdministrador().equals(null)) {
@@ -220,6 +220,7 @@ public class InterfazAdministrador {
   
   public static void cargarDatos() throws IOException {
 	  elAdministrador.actualizarDatos();
+	  laPieza.actualizarDatos();
   }
 
 
