@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 
 import model.Administrador;
 import model.Cliente;
@@ -13,6 +14,10 @@ import model.Galeria;
 import model.Subasta;
 import model.Venta;
 import pieza.Pieza;
+import pieza.PiezaEscultura;
+import pieza.PiezaFotografia;
+import pieza.PiezaPintura;
+import pieza.PiezaVideo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +31,7 @@ public class ControllerAdministrador {
 	
 	private HashMap<String, Pieza> mapaPiezas;
 	private Administrador administrador;
-	private BaseDatosInventario datosInventario;
+	private static BaseDatosInventario datosInventario;
 	private BaseDatosGaleria datosGaleria;
 	private BaseDatosEmpresa datosEmpresa;
 	//
@@ -97,23 +102,56 @@ public class ControllerAdministrador {
 		 
 	}
 	
-	public void crearSubasta(Subasta subasta) throws Exception {
+	public boolean crearSubasta(String tituloPieza, String valorMinimo, String valorInicial) throws Exception {
+		HashMap<String,Subasta> mapaSubastas = datosGaleria.getMapaSubastas();
+        int valorMinimoInt = Integer.parseInt(valorMinimo);
+        int valorInicialInt = Integer.parseInt(valorInicial);
+        Subasta nuevaSubasta = new Subasta(tituloPieza, valorMinimoInt, valorInicialInt);
+        
+        mapaSubastas.put(tituloPieza, nuevaSubasta);
+        
+        datosGaleria.actualizarArchivoSubastas();
 		
+		return true;
 	}
 	
 	//Despues de verificar el comprador se ejecuta:
-	public int maximoCompras(Cliente cliente) {
-		HashMap<String,Cliente> mapaParticipantesSubasta = datosGaleria.getMapaParticipantesSubasta();
-		return 0;
-	}
+	public Boolean maximoCompras(String cliente, int maximo) {
+	       try {
+	            HashMap<String, Cliente> mapaClientes = datosGaleria.getMapaParticipantesSubasta();
+
+	            if (mapaClientes.containsKey(cliente)) {
+	                Cliente nuevoCliente = mapaClientes.get(cliente);
+	                // Establecer el nuevo máximo de compras para el cliente
+	                nuevoCliente.setMaximo(maximo);
+	                datosGaleria.actualizarArchivoParticipantesSubasta();
+	                return true;
+	        
+	            } else {
+	                System.out.println("El usuario " + cliente + " no existe.");
+	                return false;
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return false; // Ocurrió un error al actualizar el archivo de clientes
+	        }
+	    }
 	
-	public static void agregarPiezaAGaleria(Pieza pieza, Galeria galeria) {
-		
-	}
+
 		
 	//LOGICA INVENTARIO
 	
 	public static void agregarPiezaAInventario(Pieza pieza) {
+	    try {
+	        HashMap<String, Pieza> mapaPiezas = datosInventario.getMapaPiezas();
+	        mapaPiezas.put(pieza.getTitulo(), pieza);
+	        datosInventario.actualizarArchivoPiezas();
+
+	        System.out.println("Pieza registrada exitosamente.");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        System.out.println("Error al registrar la pieza.");
+	    }
 		
 	}
 	
@@ -136,11 +174,14 @@ public class ControllerAdministrador {
         }
     }
     
-    
+    public List<String> historialComprasCliente(String nombreCliente) {
+        return datosGaleria.obtenerHistorialComprasCliente(nombreCliente);
+    }
     
 	public void actualizarDatos() throws IOException {
 		// los datos de todas las calses BasesDatos... :
 		datosEmpresa.cargarDatosEmpresa();
+		datosGaleria.cargarDatosGaleria();
 	}
     
 

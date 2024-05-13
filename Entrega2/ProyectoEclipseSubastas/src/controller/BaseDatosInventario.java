@@ -53,11 +53,11 @@ public class BaseDatosInventario {
 		String[] partes = linea.split(",");
 		String titulo = partes[0];
 
-		int anoCreacion = Integer.parseInt(partes[1].trim());
+		int anoCreacion = Integer.parseInt(partes[1]);
 		String artista = partes[2];
 		String lugarCreacion = partes[3];
 		String propietario = partes[4];
-		int valorFijo=Integer.parseInt(partes[5].trim());
+		int valorFijo=Integer.parseInt(partes[5]);
 		Boolean disponibleEnSubasta= Boolean.parseBoolean(partes[6]);
 		String tipo=partes[7];
 		boolean bloqueada = Boolean.parseBoolean(partes[8]);
@@ -158,7 +158,7 @@ public class BaseDatosInventario {
 	}
 	
 	
-	private void actualizarArchivoPiezas() throws IOException {
+	public void actualizarArchivoPiezas() throws IOException {
 		String texto=generarTextoCarros();
 		FileWriter fichero = new FileWriter("data/piezas.txt");
 		fichero.write(texto);

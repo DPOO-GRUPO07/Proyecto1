@@ -22,7 +22,7 @@ public class Inventario {
 	
 
 	
-	public ArrayList<Pieza> getCarro()
+	public ArrayList<Pieza> getPiezas()
 	{ 
 		return this.piezas;
 	}

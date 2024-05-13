@@ -114,8 +114,10 @@ public class BaseDatosEmpresa{
 		String usuario = partes[0];
 		String contrasena = partes[1];
 		String nombre=partes[2];
+		int maximoCompras= Integer.parseInt(partes[3]);
+		boolean validado= Boolean.parseBoolean(partes[4]);
 
-		Cliente cliente = new Cliente(usuario, contrasena, nombre);
+		Cliente cliente = new Cliente(usuario, contrasena, nombre, maximoCompras, validado);
 		ArrayList<Object> lista=new ArrayList<Object>();
 		lista.add(cliente);
 		return lista;

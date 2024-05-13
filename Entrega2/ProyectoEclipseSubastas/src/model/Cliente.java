@@ -10,13 +10,17 @@ public class Cliente implements Usuario {
 	private String contrasena;
 	//datos generales:
 	private String nombre;
+	private int maximoCompras;
+	private boolean validado;
 	//private Boolean Propietario;
 	//
 	
-	public Cliente(String usuario, String contrasena, String nombre) {
+	public Cliente(String usuario, String contrasena, String nombre , Integer maximoCompras, Boolean validado) {
 		this.contrasena=contrasena;
 		this.nombre=nombre;
 		this.usuario=usuario;
+		this.maximoCompras=maximoCompras;
+		this.validado=validado;
 	}
 	
 	
@@ -33,6 +37,21 @@ public class Cliente implements Usuario {
 
 		return nombre;
 	}
+	
+	public int getMaximo() {
+
+		return maximoCompras;
+	}
+	public Boolean getValidado() {
+
+		return validado;
+	}
+	//SETTERS
+	
+	public Integer setMaximo(int maximo) {
+		return maximo;
+	}
+	
    
 }
 	
