@@ -67,7 +67,6 @@ public class Interfaz {
 			System.out.println("\n## Bienvenido a la Casa de Subastas ##\n");
 
 			System.out.println("1. Ingresar como Cliente");
-			System.out.println(datosInventario.obtenerHistoriaArtista("Miguel Ángel"));
 			System.out.println("2. Ingresar como Empleado");
 			System.out.println("3. Ingresar como Administrador");
 			System.out.println("4. Salir de la Aplicacion");
