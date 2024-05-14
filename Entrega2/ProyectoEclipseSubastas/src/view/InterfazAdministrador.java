@@ -25,6 +25,8 @@ public class InterfazAdministrador {
 		System.out.println("Bienvenido Administrador");
 		elAdministrador = new ControllerAdministrador();
 		elAdministrador.setDatosEmpresa(datos); // Creamos instancia del controlador y añadimos los datos
+		elAdministrador.setDatosInventario(datosInventario);
+		elAdministrador.setDatosGaleria(datosGaleria);
 		
 		// para trabajar
 		
@@ -50,6 +52,7 @@ public class InterfazAdministrador {
 							    String titulo = input("Ingrese el Titulo de la Pieza");
 							    int ano = Integer.parseInt(input("Ingrese el año de creacion"));
 							    String lugar = input("Ingrese el lugar de creacion");
+							    String artista = input("Ingrese el nombre del artista");
 							    String propietario = input("Ingrese el nombre del propietario de la pieza, si no tiene puede colocar N/A");
 							    int valorFijo = Integer.parseInt(input("Ingrese el valor fijo"));
 							    String tipo = input("Ingrese el Tipo de pieza");
@@ -64,7 +67,7 @@ public class InterfazAdministrador {
 							            float peso = Float.parseFloat(input("Ingrese el peso de la pieza"));
 							            boolean necesitaElectricidad = Boolean.parseBoolean(input("Ingrese si necesita electricidad (true o false): "));
 							            String detallesInstalacion = input("Ingrese los detalles de la pieza");
-							            PiezaEscultura escultura = new PiezaEscultura(titulo, ano, lugar, propietario, null, valorFijo, true, tipo, false, alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
+							            PiezaEscultura escultura = new PiezaEscultura(titulo, ano, artista, lugar, propietario,valorFijo, true, tipo, false, alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
 							            elAdministrador.agregarPiezaAInventario(escultura);
 							            break;
 							        case "pintura":

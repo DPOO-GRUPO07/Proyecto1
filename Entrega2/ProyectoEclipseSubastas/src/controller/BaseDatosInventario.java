@@ -76,7 +76,7 @@ public class BaseDatosInventario {
 			float peso=Float.parseFloat(partes[13]);
 			Boolean necesitaElectricidad = Boolean.parseBoolean(partes[14]);
 			String detallesInstalacion=partes[15];
-			pieza=new PiezaEscultura(titulo, anoCreacion,artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
+			pieza=new PiezaEscultura(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
 		}
 		 else if ("fotografia".equals(tipo)) {
 			float alto = Float.parseFloat(partes[9]);

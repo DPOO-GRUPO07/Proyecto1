@@ -10,7 +10,7 @@ public class PiezaEscultura extends Pieza{
 	private boolean necesitaElectricidad;
 	private String detallesInstalacion;
 
-	public PiezaEscultura(String titulo, int anoCreacion, String artista,String lugarCreacion, String propietario,
+	public PiezaEscultura(String titulo, int anoCreacion, String artista, String lugarCreacion, String propietario,
 			int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada, float alto, float ancho, float profundidad, String material, float peso, boolean necesitaElectricidad, String detallesInstalacion) {
 		super(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
 		// TODO Auto-generated constructor stub

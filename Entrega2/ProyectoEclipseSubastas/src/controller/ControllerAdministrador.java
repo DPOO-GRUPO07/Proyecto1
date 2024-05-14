@@ -51,6 +51,10 @@ public class ControllerAdministrador {
 		this.datosGaleria=datosGaleria;
 	}
 	
+	public void setDatosInventario(BaseDatosInventario datosInventario) {
+		ControllerAdministrador.datosInventario=datosInventario;
+	}
+	
 	public void LogIn(String usuario,String contrasena) {
 		
 		Administrador administrador = datosEmpresa.getMapaAdministradores().get(usuario);
