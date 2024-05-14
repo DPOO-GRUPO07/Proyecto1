@@ -158,8 +158,6 @@ public class ControllerAdministrador {
 		
 	}
 	
-	
-	
     
     public List<String> historialComprasCliente(String nombreCliente) {
         return datosGaleria.obtenerHistorialComprasCliente(nombreCliente);
@@ -169,7 +167,8 @@ public class ControllerAdministrador {
 		// los datos de todas las calses BasesDatos... :
 		datosEmpresa.cargarDatosEmpresa();
 		datosGaleria.cargarDatosGaleria();
-	}
+		datosInventario.cargarTodosLosDatos();	
+		}
     
 
 }
