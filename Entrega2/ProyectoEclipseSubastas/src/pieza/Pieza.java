@@ -70,18 +70,67 @@ public class Pieza {
 	public boolean getBloqueo() {
 		return bloqueada;
 	}
-	
+
+	public boolean isDisponibleEnSubasta() {
+		return disponibleEnSubasta;
+	}
+
+	public void setDisponibleEnSubasta(boolean disponibleEnSubasta) {
+		this.disponibleEnSubasta = disponibleEnSubasta;
+	}
+
+	public boolean isBloqueada() {
+		return bloqueada;
+	}
+
+	public void setBloqueada(boolean bloqueada) {
+		this.bloqueada = bloqueada;
+	}
+
+	public List<String> getHistorialTransacciones() {
+		return historialTransacciones;
+	}
+
+	public void setHistorialTransacciones(List<String> historialTransacciones) {
+		this.historialTransacciones = historialTransacciones;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public void setAnoCreacion(int anoCreacion) {
+		this.anoCreacion = anoCreacion;
+	}
+
+	public void setLugarCreacion(String lugarCreacion) {
+		this.lugarCreacion = lugarCreacion;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
+	}
+
+	public void setValorFijo(int valorFijo) {
+		this.valorFijo = valorFijo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+    // Método para agregar una nueva transacción al historial
+    public void agregarTransaccion(String transaccion) {
+        historialTransacciones.add(transaccion);
+    }
 
 	//Setters
 	
-	
+	/*
 	public String setTitulo(String nuevoTitulo) {
 		return nuevoTitulo;
 	}
 	
-	public String setAnoCreacion(String nuevoAno) {
-		return nuevoAno;
-	}
 	
 	public String setTipo(String nuevoTipo) {
 		return nuevoTipo;
@@ -92,15 +141,8 @@ public class Pieza {
 	}
 
 
-	// Método para obtener el historial de transacciones
-    public List<String> getHistorialTransacciones() {
-        return historialTransacciones;
-    }
-
-    // Método para agregar una nueva transacción al historial
-    public void agregarTransaccion(String transaccion) {
-        historialTransacciones.add(transaccion);
-    }
+	
  
-
+*/
 }
+

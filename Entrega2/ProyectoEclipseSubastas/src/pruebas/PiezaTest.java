@@ -30,9 +30,9 @@ public class PiezaTest {
 
         pieza.setTitulo("Mona Lisa");
         pieza.setArtista("Leonardo di ser Piero");
-        pieza.setAnoCreacion("1506");
+        pieza.setAnoCreacion(1506);
         pieza.setTipo("Óleo sobre tabla");
-        pieza.serPropietario("Gobierno francés");
+        pieza.setPropietario("Gobierno francés");
 
         assertEquals("Mona Lisa", pieza.getTitulo());
         assertEquals("Leonardo di ser Piero", pieza.getArtista());

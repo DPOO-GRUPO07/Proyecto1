@@ -36,9 +36,9 @@ public class PiezaEsculturaTest {
 
         escultura.setTitulo("El Pensador");
         escultura.setArtista("Auguste Rodin");
-        escultura.setAnoCreacion("1904");
+        escultura.setAnoCreacion(1904);
         escultura.setMaterial("Bronce");
-        escultura.serPropietario("Museo Rodin");
+        escultura.setPropietario("Museo Rodin");
 
         assertEquals("El Pensador", escultura.getTitulo());
         assertEquals("Auguste Rodin", escultura.getArtista());

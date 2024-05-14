@@ -53,11 +53,46 @@ public class PiezaEscultura extends Pieza{
 	public String getDetallesInstalacion() {
 		return detallesInstalacion;
 	}
-	
 
 	//Setters
+	public void setAlto(float alto) {
+		this.alto = alto;
+	}
+
+
+	public void setAncho(float ancho) {
+		this.ancho = ancho;
+	}
+
+
+	public void setProfundidad(float profundidad) {
+		this.profundidad = profundidad;
+	}
+
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+
+
+	public void setNecesitaElectricidad(boolean necesitaElectricidad) {
+		this.necesitaElectricidad = necesitaElectricidad;
+	}
+
+
+	public void setDetallesInstalacion(String detallesInstalacion) {
+		this.detallesInstalacion = detallesInstalacion;
+	}
+	
+
 	
 	
+/*
 	public float setAltura(float altura) {
 		return altura;
 	}
@@ -74,5 +109,5 @@ public class PiezaEscultura extends Pieza{
 		return nuevoPropietario;
 	}
 	
-
+*/
 }
