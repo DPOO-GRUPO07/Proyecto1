@@ -1,2 +1,3 @@
 DPOO PROYECTO 2
-LA ENTREGA SE HACE SOBRE EL REPOSITORIO DEL PROYECTO 1
+La entrega se hace sobre el repositorio del proyecto 1
+
