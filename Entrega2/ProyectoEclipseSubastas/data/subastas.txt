@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Pieza de arte;100;50;
+=======
+Pieza de arte;100.0;50.0;
+>>>>>>> bdc1f7861f36904595be7dd7d43e4e70793ba6a8

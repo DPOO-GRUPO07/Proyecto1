@@ -30,6 +30,12 @@ public class BaseDatosInventario {
 		
 	}
 	
+	public void setMapaArtistas(HashMap<String, List<Pieza>> mapaArtistas) {
+	    this.mapaArtistas = mapaArtistas;
+	}
+
+	
+	
 	//Inventario
 	//READ: Descargar todas las piezas
 
