@@ -43,7 +43,10 @@ public class InterfazCliente {
 							mostrarMenu2();
 							int opcion_seleccionada2 = Integer.parseInt(input("Ingresa una opcion "));
 				            if (opcion_seleccionada2 == 1 && elCliente.getCliente() != null) {
-				            	realizarCompra();
+				            	String nombrePieza = input("Ingrese el nombre de la pieza que desee comprar");
+				            	elCliente.realizarCompraFija(nombrePieza);
+				            	datosGaleria.actualizarArchivoVenta();
+				            	//realizarCompra();
 				            }
 				            else if (opcion_seleccionada2 == 2){
 				                if (elCliente.getCliente() != null) {

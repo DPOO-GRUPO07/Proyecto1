@@ -1,2 +1,1 @@
-David;La Virgen de las Rocas;10;subasta;false
-Tatiana;Las Meninas;20;directo;false
+Tatiana;Las Meninas;20;directo;falseDavid;La Virgen de las Rocas;10;subasta;falsedavid;El pensador;8000000;fijo;false

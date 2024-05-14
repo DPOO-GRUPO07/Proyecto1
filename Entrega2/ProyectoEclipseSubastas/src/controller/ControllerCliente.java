@@ -101,6 +101,7 @@ public class ControllerCliente {
 				boolean estaConfirmada = false; 
 				Venta estaVenta= new Venta(esteUsuario, estaPieza, esteValorPieza, esteTipoCompra, estaConfirmada);
 				mapaVentas.put(cliente.getUsuario(), estaVenta);
+				System.out.println(mapaVentas);
 			}
     	}
     }
