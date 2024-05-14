@@ -8,10 +8,12 @@ import controller.BaseDatosInventario;
 import controller.BaseDatosEmpresa;
 import controller.BaseDatosGaleria;
 import controller.ControllerCliente;
+import model.Inventario;
 
 public class InterfazCliente {
 	public static ControllerCliente elCliente;
 	private static BaseDatosGaleria datosGaleria;
+	private static BaseDatosInventario datosPiezas;
 	
 	
 	public static void correrCliente(BaseDatosEmpresa datos, BaseDatosInventario datosInventario, BaseDatosGaleria datosGaleria) throws IOException
@@ -19,6 +21,7 @@ public class InterfazCliente {
 		System.out.println("Bienvenido cliente");
 		elCliente= new ControllerCliente(datos, datosInventario);
 		elCliente.setDatosGaleria(datosGaleria); // Creamos instancia del controlador y añadimos los datos
+		datosPiezas = datosInventario;
 		// para trabajar
 		
 		boolean continuar = true;
@@ -50,10 +53,27 @@ public class InterfazCliente {
 				                    elCliente.actualizarOferta(nombreCliente, nombrePieza, valorPropuesto);;
 				                    System.out.println("Saliendo de la aplicación ...");
 				                    continuar = false;
-				                } else {
+				                } 
+
+				                else {
 				                    System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
 				                }
 				            }
+				              else if (opcion_seleccionada2 == 3) {
+				            	  // pensar como hacerlo logico con la estructura del proyecto
+				            	  System.out.println("En construccion");
+				              }
+				              else if(opcion_seleccionada2 == 4) {
+				            	  String piezaNombre = input("Escriba el nombre de la pieza a consultar");
+				            	  System.out.println("\n");
+				            	  System.out.println(datosPiezas.obtenerHistoriaPieza(piezaNombre));
+
+				              }
+				              else if(opcion_seleccionada2 == 5) {
+				            	  String artistaNombre = input("Escriba el nombre del artista que desea consultar");
+				            	  System.out.println("\n");
+				            	  System.out.println(datosPiezas.obtenerHistoriaArtista(artistaNombre));
+				              }
 				            else if (elCliente == null){
 					            System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
 				            }
@@ -104,7 +124,8 @@ public class InterfazCliente {
 			System.out.println("1. Realizar Compra por Valor fijo");
 			System.out.println("2. Realizar Compra por medio de Subasta");
 			System.out.println("3. Vender o subastar Pieza (Consignacion)");
-			System.out.println("4. Ver mi historial de piezas");
+			System.out.println("4. Ver información de una pieza expecífica");
+			System.out.println("5. Ver historial de un artista expecifico");
 		}
 		
 		
