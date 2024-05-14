@@ -132,7 +132,11 @@ public class ControllerCliente {
     
     
     /*Esta función permitira al cliente o dueño de una pieza poner a en venta alguna pieza*/
-    public void entregarPiezaConsignacion (String titulo, int anoCreacion,String artista, String lugarCreacion, String propietario, int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada) {
+    public void entregarEsculturaConsignacion (String titulo, int anoCreacion,String artista, String lugarCreacion, String propietario, int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada) {
+    	
+    }
+    
+    public void entregarPinturaConsignación(String titulo, int anoCreacion) {
     	
     }
     
