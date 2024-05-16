@@ -144,17 +144,13 @@ public class ControllerAdministrador {
 		
 	//LOGICA INVENTARIO
 	
-	public static void agregarPiezaAInventario(Pieza pieza) {
-	    try {
-	        HashMap<String, Pieza> mapaPiezas = datosInventario.getMapaPiezas();
-	        mapaPiezas.put(pieza.getTitulo(), pieza);
-	        datosInventario.actualizarArchivoPiezas();
+	public void agregarPiezaAInventario(Pieza pieza) {
+	    HashMap<String, Pieza> mapaPiezas = datosInventario.getMapaPiezas();
+		mapaPiezas.put(pieza.getTitulo(), pieza);
+		String linea = datosInventario.comprimirPieza(pieza);
+		BaseDatosInventario.agregarLinea("data/piezas.txt",linea);
 
-	        System.out.println("Pieza registrada exitosamente.");
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        System.out.println("Error al registrar la pieza.");
-	    }
+		System.out.println("Pieza registrada exitosamente.");
 		
 	}
 	

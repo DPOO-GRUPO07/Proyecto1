@@ -60,11 +60,11 @@ public class InterfazAdministrador {
 							    // Dependiendo del tipo de pieza, creamos la instancia correspondiente y la registramos
 							    switch (tipo.toLowerCase()) {
 							        case "escultura":
-							            float alto = Float.parseFloat(input("Ingrese la altura de la pieza"));
-							            float ancho = Float.parseFloat(input("Ingrese el ancho de la pieza"));
-							            float profundidad = Float.parseFloat(input("Ingrese la profundidad"));
+							            int alto = Integer.parseInt(input("Ingrese la altura de la pieza"));
+							            int ancho = Integer.parseInt(input("Ingrese el ancho de la pieza"));
+							            int profundidad = Integer.parseInt(input("Ingrese la profundidad"));
 							            String material = input("Ingrese cual es el material de la pieza");
-							            float peso = Float.parseFloat(input("Ingrese el peso de la pieza"));
+							            int peso = Integer.parseInt(input("Ingrese el peso de la pieza"));
 							            boolean necesitaElectricidad = Boolean.parseBoolean(input("Ingrese si necesita electricidad (true o false): "));
 							            String detallesInstalacion = input("Ingrese los detalles de la pieza");
 							            PiezaEscultura escultura = new PiezaEscultura(titulo, ano, artista, lugar, propietario,valorFijo, true, tipo, false, alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
@@ -78,8 +78,8 @@ public class InterfazAdministrador {
 							            elAdministrador.agregarPiezaAInventario(pintura);
 							            break;
 							        case "fotografia":
-							            float altoFoto = Float.parseFloat(input("Ingrese la altura de la pieza"));
-							            float largo = Float.parseFloat(input("Ingrese el largo de la pieza"));
+							            int altoFoto = Integer.parseInt(input("Ingrese la altura de la pieza"));
+							            int largo = Integer.parseInt(input("Ingrese el largo de la pieza"));
 							            String color = input("Ingrese cual es el color de la pieza");
 							            PiezaFotografia fotografia = new PiezaFotografia(titulo, ano, lugar, propietario, null, valorFijo, true, tipo, false, altoFoto, largo, color);
 							            elAdministrador.agregarPiezaAInventario(fotografia);

@@ -11,6 +11,7 @@ import pieza.PiezaPintura;
 import pieza.PiezaVideo;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class BaseDatosInventario {
 	}
 	
 	public Pieza descomprimirPieza(String linea) {
-		String[] partes = linea.split(",");
+		String[] partes = linea.split("[,;]");
 		String titulo = partes[0];
 
 		int anoCreacion = Integer.parseInt(partes[1]);
@@ -75,14 +76,14 @@ public class BaseDatosInventario {
 			pieza = new PiezaPintura(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada, tipoPintura, dimensiones, detalles);
 		}
 		else if ("Escultura".equals(tipo)) {
-			float alto=Float.parseFloat(partes[9]);
-			float ancho=Float.parseFloat(partes[10]);
-			float profundidad=Float.parseFloat(partes[11]);
+			int alto=Integer.parseInt(partes[9]);
+			int ancho=Integer.parseInt(partes[10]);
+			int profundidad=Integer.parseInt(partes[11]);
 			String material=partes[12];
-			float peso=Float.parseFloat(partes[13]);
+			int peso=Integer.parseInt(partes[13]);
 			Boolean necesitaElectricidad = Boolean.parseBoolean(partes[14]);
 			String detallesInstalacion=partes[15];
-			pieza=new PiezaEscultura(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada,alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
+			pieza=new PiezaEscultura(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada, alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion);
 		}
 		 else if ("fotografia".equals(tipo)) {
 			float alto = Float.parseFloat(partes[9]);
@@ -104,7 +105,7 @@ public class BaseDatosInventario {
 	
 	//Write: Actualizar archivo, reescribirlo.
 
-	private String generarTextoCarros(){
+	private String generarTextoPiezas(){
 		String texto="";
 		for(Pieza pieza:mapaPiezas.values()) {
 			texto+=comprimirPieza(pieza);
@@ -119,19 +120,22 @@ public class BaseDatosInventario {
 		String artista = pieza.getArtista();
 		String lugarCreacion = pieza.getLugarCreacion();
 		String propietario = pieza.getPropietario();
+		String bloqueada = String.valueOf(pieza.getBloqueo());
 	    String valorFijo = String.valueOf(pieza.getValorFijo()); 
 	    String disponibleEnSubasta = String.valueOf(pieza.getDisponibleSubasta());
 		String tipo = pieza.getTipo();
-		String str = titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
-				+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo ;
+		String str = titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";" + valorFijo + ";"
+				+ propietario + ";" + disponibleEnSubasta + ";" + tipo + ";" + bloqueada ;
 		if(tipo=="pintura") {
 			PiezaPintura piezaPintura = (PiezaPintura) pieza;
 			String tipoPintura = piezaPintura.getTipoPintura();
 			String dimensiones = piezaPintura.getDimensiones();
 			String detalles = piezaPintura.getDetalles();
 			
-			str = titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
-					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + tipoPintura + ";" + dimensiones + ";" + detalles; 
+			//titulo, ano, artista, lugar, propietario, valorFijo, true, tipo, false, alto, ancho, profundidad, material, peso, necesitaElectricidad, detallesInstalacion
+			
+			str = titulo + ";" + anoCreacion + ";"+ artista + ";"+ lugarCreacion + ";" + propietario + ";" + valorFijo + ";"
+					+ disponibleEnSubasta + ";" + tipo + ";" + bloqueada +";"+ tipoPintura + ";" + dimensiones + ";" + detalles; 
 			
 		}
 		else if ("Escultura".equals(tipo))  {
@@ -144,10 +148,9 @@ public class BaseDatosInventario {
 			String necesitaElectricidad= String.valueOf(piezaEscultura.getNecesitaElectricidad());
 			String detallesInstalacion = piezaEscultura.getDetallesInstalacion();
 			
-			str=titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
-					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + ";" + alto + ";" + 
-					ancho + ";" + profundidad + ";" + material + ";" + peso + ";" + necesitaElectricidad + ";" + detallesInstalacion;
-					
+			//El beso;1889;Auguste Rodin; "París"; "Museo Rodin";12000000; "Museo Rodin";true;"Escultura";true
+			
+			str=titulo + ";" + anoCreacion + ";"+ artista + ";"+ lugarCreacion + ";" + propietario + ";" + valorFijo + ";"+ disponibleEnSubasta + ";" + tipo + ";" + bloqueada +";" + alto + ";" + ancho + ";" + profundidad + ";" + material + ";" + peso + ";" + necesitaElectricidad + ";" + detallesInstalacion;
 		}
 		
 		else if (tipo=="fotografia") {
@@ -155,9 +158,19 @@ public class BaseDatosInventario {
 			String alto = String.valueOf(piezaFotografia.getAlto());
 			String ancho = String.valueOf(piezaFotografia.getLargo());
 			String profundidad = String.valueOf(piezaFotografia.getColor());
-			str=titulo + ";" + anoCreacion + ";"+ artista + ";" + lugarCreacion + ";" + propietario + ";"
-					+ propietario + ";" + valorFijo + ";" + disponibleEnSubasta + ";" + tipo + ";" + alto + ";" + ancho + ";" + profundidad;
+			str=titulo + ";" + anoCreacion + ";"+ artista + ";"+ lugarCreacion + ";" + propietario + ";" + valorFijo + ";"
+					+ disponibleEnSubasta + ";" + tipo + ";" + bloqueada +";" + alto + ";" + ancho + ";" + profundidad;
 		}
+		
+		else if (tipo=="video") {
+			PiezaFotografia piezaFotografia = (PiezaFotografia) pieza;
+			String alto = String.valueOf(piezaFotografia.getAlto());
+			String ancho = String.valueOf(piezaFotografia.getLargo());
+			String profundidad = String.valueOf(piezaFotografia.getColor());
+			str=titulo + ";" + anoCreacion + ";"+ artista + ";"+ lugarCreacion + ";" + propietario + ";" + valorFijo + ";"
+					+ disponibleEnSubasta + ";" + tipo + ";" + bloqueada +";" + alto + ";" + ancho + ";" + profundidad;
+		}
+		
 
 		return str;
 
@@ -165,7 +178,7 @@ public class BaseDatosInventario {
 	
 	
 	public void actualizarArchivoPiezas() throws IOException {
-		String texto=generarTextoCarros();
+		String texto=generarTextoPiezas();
 		FileWriter fichero = new FileWriter("data/piezas.txt");
 		fichero.write(texto);
 		fichero.close();
@@ -246,6 +259,22 @@ public class BaseDatosInventario {
             return historia.toString();
         } else {
             return "No se encontró el artista: " + nombreArtista;
+        }
+    }
+	
+    
+    public static void agregarLinea(String archivo, String nuevaLinea) {
+        try {
+            // Abre el archivo en modo de adicion
+            BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
+            
+            // Escribe la nueva linea en el archivo
+            writer.write(nuevaLinea + System.getProperty("line.separator"));
+            
+            writer.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 	

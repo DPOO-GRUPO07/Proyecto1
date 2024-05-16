@@ -2,16 +2,16 @@ package pieza;
 
 public class PiezaEscultura extends Pieza{
 	
-	private float alto;
-	private float ancho;
-	private float profundidad;
+	private int alto;
+	private int ancho;
+	private int profundidad;
 	private String material;
-	private float peso;
+	private int peso;
 	private boolean necesitaElectricidad;
 	private String detallesInstalacion;
 
 	public PiezaEscultura(String titulo, int anoCreacion, String artista, String lugarCreacion, String propietario,
-			int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada, float alto, float ancho, float profundidad, String material, float peso, boolean necesitaElectricidad, String detallesInstalacion) {
+			int valorFijo, Boolean disponibleEnSubasta, String tipo, boolean bloqueada, int alto, int ancho, int profundidad, String material, int peso, boolean necesitaElectricidad, String detallesInstalacion) {
 		super(titulo, anoCreacion, artista, lugarCreacion, propietario, valorFijo, disponibleEnSubasta, tipo, bloqueada);
 		// TODO Auto-generated constructor stub
 		this.alto=alto;
@@ -28,13 +28,13 @@ public class PiezaEscultura extends Pieza{
 	 * GETTER AND SETTERS
 	 * 
 	 * */
-	public float getAlto() {
+	public int getAlto() {
 		return alto;
 	}
-	public float getAncho() {
+	public int getAncho() {
 		return ancho;
 	}
-	public float getProfundidad() {
+	public int getProfundidad() {
 		return profundidad;
 	}
 
@@ -42,7 +42,7 @@ public class PiezaEscultura extends Pieza{
 		return material;
 	}
 	
-	public float getPeso() {
+	public int getPeso() {
 		return peso;
 	}
 	
@@ -55,17 +55,17 @@ public class PiezaEscultura extends Pieza{
 	}
 
 	//Setters
-	public void setAlto(float alto) {
+	public void setAlto(int alto) {
 		this.alto = alto;
 	}
 
 
-	public void setAncho(float ancho) {
+	public void setAncho(int ancho) {
 		this.ancho = ancho;
 	}
 
 
-	public void setProfundidad(float profundidad) {
+	public void setProfundidad(int profundidad) {
 		this.profundidad = profundidad;
 	}
 
@@ -75,7 +75,7 @@ public class PiezaEscultura extends Pieza{
 	}
 
 
-	public void setPeso(float peso) {
+	public void setPeso(int peso) {
 		this.peso = peso;
 	}
 

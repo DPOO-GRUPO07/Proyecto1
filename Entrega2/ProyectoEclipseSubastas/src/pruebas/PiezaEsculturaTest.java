@@ -10,7 +10,7 @@ public class PiezaEsculturaTest {
 
     @Test
     public void testCrearPiezaEscultura() {
-        PiezaEscultura escultura = new PiezaEscultura("David", 1504, "Miguel Ángel", "Italia", "Galería de la Academia de Florencia", 100000000, false, "escultura", false, 5.0f, 3.0f, 2.0f, "Mármol", 500.0f, false, "No requiere instalación especial");
+        PiezaEscultura escultura = new PiezaEscultura("David", 1504, "Miguel Ángel", "Italia", "Galería de la Academia de Florencia", 100000000, false, "escultura", false, 5, 3, 2, "Mármol", 500, false, "No requiere instalación especial");
 
         assertEquals("David", escultura.getTitulo());
         assertEquals(1504, escultura.getAnoCreacion());
@@ -32,7 +32,7 @@ public class PiezaEsculturaTest {
 
     @Test
     public void testModificarPiezaEscultura() {
-        PiezaEscultura escultura = new PiezaEscultura("David", 1504, "Miguel Ángel", "Italia", "Galería de la Academia de Florencia", 100000000, false, "escultura", false, 5.0f, 3.0f, 2.0f, "Mármol", 500.0f, false, "No requiere instalación especial");
+        PiezaEscultura escultura = new PiezaEscultura("David", 1504, "Miguel Ángel", "Italia", "Galería de la Academia de Florencia", 100000000, false, "escultura", false, 5, 3, 2, "Mármol", 500, false, "No requiere instalación especial");
 
         escultura.setTitulo("El Pensador");
         escultura.setArtista("Auguste Rodin");
