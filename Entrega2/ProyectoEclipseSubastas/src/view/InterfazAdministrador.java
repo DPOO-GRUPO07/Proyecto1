@@ -22,7 +22,7 @@ public class InterfazAdministrador {
 	public static ControllerAdministrador laPieza;
 	public static void correrAdministrador(BaseDatosEmpresa datos, BaseDatosInventario datosInventario, BaseDatosGaleria datosGaleria) throws Exception
 	{
-		System.out.println("Bienvenido Administrador");
+		System.out.println("LogIn Administrador");
 		elAdministrador = new ControllerAdministrador();
 		elAdministrador.setDatosEmpresa(datos); // Creamos instancia del controlador y añadimos los datos
 		elAdministrador.setDatosInventario(datosInventario);
@@ -35,13 +35,7 @@ public class InterfazAdministrador {
 		{
 			try
 			{
-				mostrarMenu();
-				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
-				if (opcion_seleccionada == 1) {
 					boolean continuar2 = LogIn();
-					if (continuar2==false) {
-						System.out.println("No se pudo inicar sesion");
-					}
 					while (continuar2) 
 					{
 						try
@@ -149,21 +143,7 @@ public class InterfazAdministrador {
 
 					}
 				}
-				else if (opcion_seleccionada == 2)
-				{
-					//cargarDatos();
-					System.out.println("Saliendo de la aplicación ...");
-					continuar = false;
-				}
-				else if (elAdministrador == null)
-				{
-					System.out.println("Para poder ejecutar esta opción primero debe iniciar sesión");
-				}
-				else
-				{
-					System.out.println("Por favor seleccione una opción válida.");
-				}
-			}
+			
 			catch (NumberFormatException e)
 			{
 				System.out.println("Debe seleccionar uno de los números de las opciones.");
